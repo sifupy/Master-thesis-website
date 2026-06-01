@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hybrid Classical–Quantum Selection of Genetic Biomarkers | Addar & Rabehi 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #050816;
+    --card: #0b1220;
+    --border: rgba(255,255,255,0.07);
+    --primary: #00E5FF;
+    --secondary: #7C3AED;
+    --accent: #00FFA3;
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
+  code, .mono { font-family: 'Space Mono', monospace; }
+
+  /* CANVAS BACKGROUND */
+  #particles-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* GRADIENT ORBS */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    animation: orbFloat 12s ease-in-out infinite;
+  }
+  .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,229,255,0.15) 0%, transparent 70%); top: -100px; left: -100px; }
+  .orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%); top: 20%; right: -200px; animation-delay: -5s; }
+  .orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,255,163,0.08) 0%, transparent 70%); bottom: 10%; left: 30%; animation-delay: -8s; }
+
+  @keyframes orbFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-40px) scale(1.05); }
+  }
+
+  /* NAVBAR */
+  #navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    transition: all 0.4s ease;
+    padding: 20px 0;
+  }
+  #navbar.scrolled {
+    background: rgba(5,8,22,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+  .nav-link {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--primary);
+    transition: width 0.3s;
+  }
+  .nav-link:hover { color: var(--primary); }
+  .nav-link:hover::after { width: 100%; }
+
+  /* GLASS CARDS */
+  .glass-card {
+    background: rgba(11,18,32,0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+  .glass-card-hover {
+    transition: all 0.35s ease;
+  }
+  .glass-card-hover:hover {
+    border-color: rgba(0,229,255,0.25);
+    box-shadow: 0 0 40px rgba(0,229,255,0.08), 0 20px 60px rgba(0,0,0,0.4);
+    transform: translateY(-4px);
+  }
+
+  /* GLOW EFFECTS */
+  .glow-primary { box-shadow: 0 0 30px rgba(0,229,255,0.2); }
+  .glow-secondary { box-shadow: 0 0 30px rgba(124,58,237,0.2); }
+  .glow-accent { box-shadow: 0 0 30px rgba(0,255,163,0.2); }
+  .text-glow { text-shadow: 0 0 30px rgba(0,229,255,0.5); }
+
+  /* GRADIENT TEXT */
+  .grad-primary { background: linear-gradient(135deg, #00E5FF 0%, #7C3AED 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-accent { background: linear-gradient(135deg, #00FFA3 0%, #00E5FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-warm { background: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary);
+    opacity: 0.8;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent);
+  }
+
+  /* ANIMATED COUNTER */
+  .counter { font-family: 'Syne', sans-serif; font-weight: 800; }
+
+  /* SCROLL ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* HERO TITLE ANIMATION */
+  @keyframes titleReveal {
+    from { opacity: 0; transform: translateY(30px) skewY(1deg); }
+    to { opacity: 1; transform: translateY(0) skewY(0); }
+  }
+  .hero-title { animation: titleReveal 1s ease forwards; }
+  .hero-subtitle { animation: titleReveal 1s 0.2s ease forwards; opacity: 0; }
+  .hero-meta { animation: titleReveal 1s 0.4s ease forwards; opacity: 0; }
+  .hero-btn { animation: titleReveal 1s 0.6s ease forwards; opacity: 0; }
+
+  /* GRADIENT BORDER */
+  .grad-border {
+    position: relative;
+    border-radius: 16px;
+  }
+  .grad-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0,229,255,0.4), rgba(124,58,237,0.4));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* BUTTON */
+  .btn-primary {
+    background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(124,58,237,0.15));
+    border: 1px solid rgba(0,229,255,0.4);
+    color: var(--primary);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    padding: 14px 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,229,255,0.1), transparent);
+    transition: left 0.5s;
+  }
+  .btn-primary:hover::before { left: 100%; }
+  .btn-primary:hover {
+    box-shadow: 0 0 40px rgba(0,229,255,0.3);
+    border-color: var(--primary);
+    background: linear-gradient(135deg, rgba(0,229,255,0.25), rgba(124,58,237,0.2));
+  }
+
+  /* PIPELINE */
+  .pipeline-step {
+    position: relative;
+    flex: 1;
+  }
+  .pipeline-step::after {
+    content: '→';
+    position: absolute;
+    right: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    opacity: 0.5;
+    font-size: 1.2rem;
+    animation: arrowPulse 2s ease-in-out infinite;
+  }
+  .pipeline-step:last-child::after { display: none; }
+  @keyframes arrowPulse {
+    0%, 100% { opacity: 0.3; transform: translateY(-50%) translateX(0); }
+    50% { opacity: 0.8; transform: translateY(-50%) translateX(3px); }
+  }
+
+  /* TABLE */
+  .results-table th { 
+    font-family: 'Space Mono', monospace; 
+    font-size: 0.7rem; 
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .results-table td { 
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.92rem;
+  }
+  .results-table tr.best-row td { 
+    background: rgba(0,229,255,0.04);
+    color: var(--primary);
+  }
+  .results-table tr.best-row td:first-child {
+    border-left: 2px solid var(--primary);
+  }
+
+  /* QUANTUM PARAMS */
+  .param-block {
+    background: rgba(0,229,255,0.04);
+    border: 1px solid rgba(0,229,255,0.15);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .param-block:hover {
+    background: rgba(0,229,255,0.08);
+    box-shadow: 0 0 30px rgba(0,229,255,0.1);
+    transform: translateY(-2px);
+  }
+  .param-symbol {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #00E5FF, #7C3AED);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* GENE CARDS */
+  .gene-card {
+    background: rgba(11,18,32,0.8);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.35s ease;
+    cursor: default;
+  }
+  .gene-card:hover {
+    border-color: rgba(0,229,255,0.3);
+    box-shadow: 0 0 40px rgba(0,229,255,0.1);
+    transform: translateY(-4px);
+  }
+  .gene-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  /* CIRCUIT SVG */
+  .circuit-wire { stroke: rgba(0,229,255,0.3); stroke-width: 1.5; fill: none; }
+  .circuit-gate { fill: rgba(0,229,255,0.1); stroke: rgba(0,229,255,0.5); stroke-width: 1; }
+  .circuit-text { fill: #00E5FF; font-family: 'Space Mono', monospace; font-size: 10px; }
+
+  /* ROADMAP */
+  .roadmap-item {
+    position: relative;
+    padding-left: 40px;
+  }
+  .roadmap-item::before {
+    content: '';
+    position: absolute;
+    left: 12px; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
+    opacity: 0.3;
+  }
+  .roadmap-dot {
+    position: absolute;
+    left: 6px; top: 8px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 12px rgba(0,229,255,0.4);
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.3); border-radius: 2px; }
+
+  /* METRIC BADGE */
+  .metric-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(0,229,255,0.1);
+    border: 1px solid rgba(0,229,255,0.2);
+    color: var(--primary);
+  }
+
+  /* CHART CONTAINER */
+  #bar-chart-canvas { border-radius: 8px; }
+
+  /* SECTION TRANSITIONS */
+  section { position: relative; z-index: 1; }
+
+  /* FLOATING BADGE */
+  .floating-badge {
+    animation: badgeFloat 4s ease-in-out infinite;
+  }
+  @keyframes badgeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* PULSE DOT */
+  .pulse-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    position: relative;
+  }
+  .pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.3;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(2); opacity: 0; }
+  }
+
+  /* GRID PATTERN */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* CONTRIBUTION CARDS */
+  .contrib-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    background: rgba(11,18,32,0.6);
+    transition: all 0.3s;
+  }
+  .contrib-card:hover {
+    border-color: rgba(124,58,237,0.3);
+    box-shadow: 0 0 30px rgba(124,58,237,0.08);
+    transform: translateY(-3px);
+  }
+
+  /* REGIME CARDS */
+  .regime-card {
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .regime-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .regime-easy::before { background: linear-gradient(90deg, #00FFA3, transparent); }
+  .regime-medium::before { background: linear-gradient(90deg, #00E5FF, transparent); }
+  .regime-hard::before { background: linear-gradient(90deg, #7C3AED, transparent); }
+
+  /* AUTHOR CARD */
+  .author-card {
+    background: rgba(11,18,32,0.8);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    text-align: center;
+    transition: all 0.35s;
+  }
+  .author-card:hover {
+    border-color: rgba(0,229,255,0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(0,229,255,0.06);
+    transform: translateY(-6px);
+  }
+  .author-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(0,229,255,0.2), rgba(124,58,237,0.2));
+    border: 2px solid rgba(0,229,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .pipeline-step::after { display: none; }
+    .hero-title-size { font-size: 2.2rem !important; line-height: 1.2 !important; }
+  }
+
+  /* HIGHLIGHT BAR */
+  .highlight-bar {
+    height: 3px;
+    border-radius: 2px;
+    margin-top: 8px;
+    transition: width 1s ease;
+  }
+
+  /* QUBO FORMULA */
+  .qubo-line {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .qubo-line span { color: var(--primary); }
+  .qubo-line em { color: var(--accent); font-style: normal; }
+  .qubo-line strong { color: var(--secondary); font-style: normal; }
+
+  /* STAT BLOCK */
+  .stat-block {
+    text-align: center;
+    padding: 32px 24px;
+    border-radius: 16px;
+    background: rgba(11,18,32,0.7);
+    border: 1px solid var(--border);
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-block::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .stat-block:nth-child(1)::before { background: linear-gradient(90deg, var(--primary), transparent); }
+  .stat-block:nth-child(2)::before { background: linear-gradient(90deg, var(--accent), transparent); }
+  .stat-block:nth-child(3)::before { background: linear-gradient(90deg, var(--secondary), transparent); }
+  .stat-block:nth-child(4)::before { background: linear-gradient(90deg, #EC4899, transparent); }
+  .stat-block:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  /* SCANLINE EFFECT */
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== CANVAS PARTICLE BACKGROUND ========== -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- ========== GRADIENT ORBS ========== -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- ========== NAVBAR ========== -->
+<nav id="navbar">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="pulse-dot"></div>
+      <span class="mono text-xs text-muted tracking-widest uppercase">QBMS · 2026</span>
+    </div>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#overview" class="nav-link">Overview</a>
+      <a href="#pipeline" class="nav-link">Pipeline</a>
+      <a href="#methods" class="nav-link">Methods</a>
+      <a href="#results" class="nav-link">Results</a>
+      <a href="#quantum" class="nav-link">Quantum</a>
+      <a href="#findings" class="nav-link">Findings</a>
+      <a href="#authors" class="nav-link">Authors</a>
+    </div>
+    <div class="metric-badge">Master's Thesis</div>
+  </div>
+</nav>
+
+<!-- ========== HERO SECTION ========== -->
+<section id="hero" class="min-h-screen flex items-center justify-center relative grid-pattern pt-24">
+  <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+    
+    <div class="flex items-center justify-center gap-3 mb-8 floating-badge">
+      <div class="metric-badge">Data Science & NLP</div>
+      <div class="w-1 h-1 rounded-full bg-primary opacity-50"></div>
+      <div class="metric-badge" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">TCGA-BRCA</div>
+      <div class="w-1 h-1 rounded-full bg-primary opacity-50"></div>
+      <div class="metric-badge" style="border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.08);color:#a78bfa">QAOA</div>
+    </div>
+
+    <h1 class="hero-title hero-title-size font-extrabold leading-tight mb-6" style="font-size:3.2rem;font-family:'Syne',sans-serif;">
+      Hybrid Classical–Quantum<br>
+      <span class="grad-primary">Selection of Genetic Biomarkers</span><br>
+      for Breast Cancer Detection
+    </h1>
+
+    <p class="hero-subtitle text-muted text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed" style="font-weight:300;">
+      Exploring Quantum Optimization for High-Dimensional Genomic Feature Selection — 
+      bridging QAOA with classical machine learning on TCGA-BRCA mutation data
+    </p>
+
+    <div class="hero-meta flex flex-wrap items-center justify-center gap-6 mb-12 text-sm">
+      <div class="flex items-center gap-2">
+        <div style="width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 8px var(--primary)"></div>
+        <span class="text-muted">Seif Eddine Addar</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div style="width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 8px var(--primary)"></div>
+        <span class="text-muted">Lokmane Rabehi</span>
+      </div>
+      <div class="flex items-center gap-2" style="color:var(--muted)">
+        <span style="color:rgba(255,255,255,0.3)">|</span>
+        <span>Supervised by Dr. Celia Hireche</span>
+      </div>
+      <div class="flex items-center gap-2" style="color:var(--muted)">
+        <span style="color:rgba(255,255,255,0.3)">|</span>
+        <span>Saad Dahlab University of Blida 1 · 2026</span>
+      </div>
+    </div>
+
+    <div class="hero-btn flex items-center justify-center gap-4 flex-wrap">
+      <a href="#overview" class="btn-primary">Explore Research ↓</a>
+      <a href="#results" class="btn-primary" style="border-color:rgba(0,255,163,0.4);color:#00FFA3;background:rgba(0,255,163,0.06)">View Results →</a>
+    </div>
+
+    <!-- HERO STATS BAR -->
+    <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+      <div class="glass-card p-4 text-center">
+        <div class="text-2xl font-bold grad-primary" style="font-family:'Syne',sans-serif;">923</div>
+        <div class="text-xs text-muted mt-1 mono tracking-wide">PATIENTS</div>
+      </div>
+      <div class="glass-card p-4 text-center">
+        <div class="text-2xl font-bold grad-accent" style="font-family:'Syne',sans-serif;">16,519</div>
+        <div class="text-xs text-muted mt-1 mono tracking-wide">GENES</div>
+      </div>
+      <div class="glass-card p-4 text-center">
+        <div class="text-2xl font-bold grad-warm" style="font-family:'Syne',sans-serif;">10</div>
+        <div class="text-xs text-muted mt-1 mono tracking-wide">QUANTUM CANDIDATES</div>
+      </div>
+      <div class="glass-card p-4 text-center">
+        <div class="text-2xl font-bold" style="font-family:'Syne',sans-serif;color:var(--accent);">4</div>
+        <div class="text-xs text-muted mt-1 mono tracking-wide">METHODS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCROLL INDICATOR -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+    <div class="mono text-xs tracking-widest text-muted">SCROLL</div>
+    <div style="width:1px;height:40px;background:linear-gradient(180deg,var(--primary),transparent);animation:fadeInOut 2s ease-in-out infinite;"></div>
+  </div>
+</section>
+
+<style>
+@keyframes fadeInOut { 0%,100%{opacity:0.4;} 50%{opacity:1;} }
+</style>
+
+<!-- DIVIDER -->
+<div class="divider my-0"></div>
+
+<!-- ========== PROJECT OVERVIEW ========== -->
+<section id="overview" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">01 / Project Overview</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">The Research Challenge</h2>
+      <p class="text-muted max-w-2xl mx-auto leading-relaxed">
+        Breast cancer genomics faces a critical dimensionality problem — discovering meaningful biomarkers from an ocean of genetic noise.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- Card 1 -->
+      <div class="glass-card glass-card-hover grad-border p-6 fade-up" style="transition-delay:0.05s">
+        <div class="mb-5">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(0,229,255,0.1)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
+            <path d="M12 20h6M22 20h6M20 12v6M20 22v6" stroke="#00E5FF" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="20" cy="20" r="3" fill="#00E5FF" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="mono text-xs tracking-widest text-primary opacity-60 mb-2">PROBLEM</div>
+        <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif;">High Dimensionality</h3>
+        <p class="text-muted text-sm leading-relaxed">Genomic datasets contain tens of thousands of features — far exceeding the number of patient samples available.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="glass-card glass-card-hover p-6 fade-up" style="transition-delay:0.1s;border-color:rgba(124,58,237,0.15)">
+        <div class="mb-5">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.3)" stroke-width="1"/>
+            <path d="M12 28L20 12L28 28" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 24h12" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="mono text-xs tracking-widest mb-2" style="color:var(--secondary);opacity:0.7">CHALLENGE</div>
+        <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif;">p ≫ n Problem</h3>
+        <p class="text-muted text-sm leading-relaxed">16,519 genes for only 923 patients creates severe overfitting risk — classical methods struggle here.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="glass-card glass-card-hover p-6 fade-up" style="transition-delay:0.15s;border-color:rgba(0,255,163,0.15)">
+        <div class="mb-5">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+            <circle cx="20" cy="20" r="8" stroke="#00FFA3" stroke-width="1.5" stroke-dasharray="3 2"/>
+            <circle cx="20" cy="20" r="3" fill="#00FFA3"/>
+          </svg>
+        </div>
+        <div class="mono text-xs tracking-widest mb-2" style="color:var(--accent);opacity:0.7">GOAL</div>
+        <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif;">Clinical Biomarkers</h3>
+        <p class="text-muted text-sm leading-relaxed">Identify a compact, clinically relevant set of genes that reliably distinguishes cancer from normal tissue.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="glass-card glass-card-hover p-6 fade-up" style="transition-delay:0.2s" style="border-color:rgba(0,229,255,0.2)">
+        <div class="mb-5">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(0,229,255,0.08)" stroke="rgba(0,229,255,0.25)" stroke-width="1"/>
+            <path d="M10 20 Q15 10 20 20 Q25 30 30 20" stroke="#00E5FF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <circle cx="10" cy="20" r="2" fill="#00E5FF"/>
+            <circle cx="20" cy="20" r="2" fill="#7C3AED"/>
+            <circle cx="30" cy="20" r="2" fill="#00FFA3"/>
+          </svg>
+        </div>
+        <div class="mono text-xs tracking-widest text-primary opacity-60 mb-2">INNOVATION</div>
+        <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif;">QAOA Optimization</h3>
+        <p class="text-muted text-sm leading-relaxed">Quantum Approximate Optimization Algorithm formulates biomarker selection as a combinatorial QUBO problem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== RESEARCH PIPELINE ========== -->
+<section id="pipeline" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,229,255,0.02),transparent)">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">02 / Research Pipeline</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">End-to-End Methodology</h2>
+      <p class="text-muted max-w-xl mx-auto">From raw genomic data to interpretable biomarker candidates — a hybrid quantum-classical workflow.</p>
+    </div>
+
+    <!-- MAIN PIPELINE -->
+    <div class="fade-up mb-12">
+      <div class="flex flex-wrap items-stretch justify-center gap-3 md:gap-2">
+        
+        <div class="pipeline-step min-w-0">
+          <div class="glass-card p-4 text-center h-full" style="min-width:110px;border-color:rgba(0,229,255,0.2)">
+            <div class="mono text-xs text-primary opacity-60 mb-2">01</div>
+            <div class="text-sm font-bold mb-1" style="font-family:'Syne',sans-serif;">MAF Files</div>
+            <div class="text-xs text-muted">Raw mutation data</div>
+            <div class="highlight-bar" style="background:linear-gradient(90deg,var(--primary),transparent);width:100%"></div>
+          </div>
+        </div>
+
+        <div class="pipeline-step min-w-0">
+          <div class="glass-card p-4 text-center h-full" style="min-width:120px">
+            <div class="mono text-xs text-primary opacity-60 mb-2">02</div>
+            <div class="text-sm font-bold mb-1" style="font-family:'Syne',sans-serif;">Mutation Matrix</div>
+            <div class="text-xs text-muted">Binary encoding</div>
+            <div class="highlight-bar" style="background:linear-gradient(90deg,var(--secondary),transparent);width:100%"></div>
+          </div>
+        </div>
+
+        <div class="pipeline-step min-w-0">
+          <div class="glass-card p-4 text-center h-full" style="min-width:120px">
+            <div class="mono text-xs text-primary opacity-60 mb-2">03</div>
+            <div class="text-sm font-bold mb-1" style="font-family:'Syne',sans-serif;">Rare Filter</div>
+            <div class="text-xs text-muted">Mutation pruning</div>
+            <div class="highlight-bar" style="background:linear-gradient(90deg,#7C3AED,transparent);width:100%"></div>
+          </div>
+        </div>
+
+        <div class="pipeline-step min-w-0">
+          <div class="glass-card p-4 text-center h-full" style="min-width:110px">
+            <div class="mono text-xs text-primary opacity-60 mb-2">04</div>
+            <div class="text-sm font-bold mb-1" style="font-family:'Syne',sans-serif;">MI Ranking</div>
+            <div class="text-xs text-muted">Mutual information</div>
+            <div class="highlight-bar" style="background:linear-gradient(90deg,var(--accent),transparent);width:100%"></div>
+          </div>
+        </div>
+
+        <div class="pipeline-step min-w-0">
+          <div class="glass-card p-4 text-center h-full glow-primary" style="min-width:110px;border-color:rgba(0,229,255,0.35);background:rgba(0,229,255,0.05)">
+            <div class="mono text-xs text-primary opacity-60 mb-2">05</div>
+            <div class="text-sm font-bold mb-1 grad-primary" style="font-family:'Syne',sans-serif;">QAOA</div>
+            <div class="text-xs text-muted">Quantum selection</div>
+            <div class="highlight-bar" style="background:linear-gradient(90deg,var(--primary),var(--secondary));width:100%"></div>
+          </div>
+        </div>
+
+        <div class="pipeline-step min-w-0">
+          <div class="glass-card p-4 text-center h-full" style="min-width:120px">
+            <div class="mono text-xs text-primary opacity-60 mb-2">06</div>
+            <div class="text-sm font-bold mb-1" style="font-family:'Syne',sans-serif;">Classification</div>
+            <div class="text-xs text-muted">Logistic Regression</div>
+            <div class="highlight-bar" style="background:linear-gradient(90deg,#EC4899,transparent);width:100%"></div>
+          </div>
+        </div>
+
+        <div class="pipeline-step min-w-0">
+          <div class="glass-card p-4 text-center h-full" style="min-width:110px;border-color:rgba(0,255,163,0.2)">
+            <div class="mono text-xs" style="color:var(--accent);opacity:0.6" class="mb-2">07</div>
+            <div class="text-sm font-bold mb-1 grad-accent" style="font-family:'Syne',sans-serif;">Evaluation</div>
+            <div class="text-xs text-muted">AUC · F1 · ROC</div>
+            <div class="highlight-bar" style="background:linear-gradient(90deg,var(--accent),transparent);width:100%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FP-GROWTH BRANCH -->
+    <div class="fade-up max-w-2xl mx-auto">
+      <div class="glass-card p-5" style="border-color:rgba(124,58,237,0.2)">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="mono text-xs" style="color:var(--secondary)">ALTERNATIVE BRANCH</div>
+          <div class="flex-1 h-px" style="background:rgba(124,58,237,0.2)"></div>
+        </div>
+        <div class="flex flex-wrap gap-3 items-center">
+          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);color:#a78bfa;font-family:'Space Mono',monospace;">Mutation Matrix</div>
+          <div style="color:var(--secondary);opacity:0.5">→</div>
+          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);color:#a78bfa;font-family:'Space Mono',monospace;">FP-Growth Mining</div>
+          <div style="color:var(--secondary);opacity:0.5">→</div>
+          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);color:#a78bfa;font-family:'Space Mono',monospace;">Pattern Features</div>
+          <div style="color:var(--secondary);opacity:0.5">→</div>
+          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);color:#a78bfa;font-family:'Space Mono',monospace;">Logistic Regression</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DATASET SECTION ========== -->
+<section id="dataset" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">03 / Dataset</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">TCGA-BRCA Cohort</h2>
+      <p class="text-muted max-w-xl mx-auto">The Cancer Genome Atlas Breast Invasive Carcinoma dataset — the gold standard for breast cancer genomics research.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 fade-up">
+      <div class="stat-block">
+        <div class="counter text-4xl font-bold grad-primary mb-2" data-target="923" data-suffix="">0</div>
+        <div class="mono text-xs tracking-widest text-muted mt-2">PATIENTS</div>
+        <div class="text-xs text-muted mt-3 opacity-70">TCGA-BRCA tumor/normal samples</div>
+      </div>
+      <div class="stat-block">
+        <div class="counter text-4xl font-bold grad-accent mb-2" data-target="16519" data-suffix="">0</div>
+        <div class="mono text-xs tracking-widest text-muted mt-2">GENES</div>
+        <div class="text-xs text-muted mt-3 opacity-70">Original feature dimensionality</div>
+      </div>
+      <div class="stat-block">
+        <div class="counter text-4xl font-bold grad-warm mb-2" data-target="4" data-suffix="">0</div>
+        <div class="mono text-xs tracking-widest text-muted mt-2">METHODS</div>
+        <div class="text-xs text-muted mt-3 opacity-70">MI · LASSO · QAOA · FP-Growth</div>
+      </div>
+      <div class="stat-block">
+        <div class="counter text-4xl font-bold mb-2" style="color:var(--accent);font-family:'Syne',sans-serif;" data-target="10" data-suffix="">0</div>
+        <div class="mono text-xs tracking-widest text-muted mt-2">QUANTUM CANDIDATES</div>
+        <div class="text-xs text-muted mt-3 opacity-70">Final QAOA-selected genes</div>
+      </div>
+    </div>
+
+    <div class="mt-8 glass-card p-6 fade-up">
+      <div class="flex flex-wrap items-center gap-4 justify-between">
+        <div>
+          <div class="section-label mb-1">TCGA-BRCA</div>
+          <div class="text-sm text-muted">Mutation Annotation Format (MAF) — somatic mutations across all sequenced samples</div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-xs px-3 py-1 rounded-full mono" style="background:rgba(0,255,163,0.08);border:1px solid rgba(0,255,163,0.2);color:#00FFA3">Binary Matrix</div>
+          <div class="text-xs px-3 py-1 rounded-full mono" style="background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);color:var(--primary)">Somatic SNVs</div>
+          <div class="text-xs px-3 py-1 rounded-full mono" style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.2);color:#a78bfa">Open Access</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== METHODS COMPARISON ========== -->
+<section id="methods" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(124,58,237,0.02),transparent)">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">04 / Methods</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Comparative Analysis</h2>
+      <p class="text-muted max-w-xl mx-auto">Four biomarker selection strategies evaluated under identical conditions on TCGA-BRCA.</p>
+    </div>
+
+    <div class="glass-card overflow-hidden fade-up">
+      <table class="results-table w-full">
+        <thead>
+          <tr>
+            <th class="text-left">Method</th>
+            <th class="text-center">AUC</th>
+            <th class="text-center">Strategy</th>
+            <th class="text-center">Selected Features</th>
+            <th class="text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="best-row">
+            <td>
+              <div class="flex items-center gap-3">
+                <div style="width:8px;height:8px;border-radius:2px;background:var(--primary)"></div>
+                <div>
+                  <div class="font-bold">LASSO</div>
+                  <div class="text-xs text-muted">Regularized Regression</div>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="font-bold mono text-lg" style="color:var(--primary)">0.7701</div>
+            </td>
+            <td class="text-center text-xs text-muted">L1 Penalization</td>
+            <td class="text-center text-xs" style="color:var(--primary)">Sparse auto-selection</td>
+            <td class="text-center">
+              <span class="metric-badge">BEST</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-3">
+                <div style="width:8px;height:8px;border-radius:2px;background:var(--secondary)"></div>
+                <div>
+                  <div class="font-bold">QAOA</div>
+                  <div class="text-xs text-muted">Quantum Optimization</div>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="font-bold mono text-lg" style="color:var(--secondary)">0.6727</div>
+            </td>
+            <td class="text-center text-xs text-muted">QUBO formulation</td>
+            <td class="text-center text-xs" style="color:var(--secondary)">10 quantum candidates</td>
+            <td class="text-center">
+              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);color:#a78bfa">QUANTUM</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-3">
+                <div style="width:8px;height:8px;border-radius:2px;background:#60A5FA"></div>
+                <div>
+                  <div class="font-bold">MI + LR</div>
+                  <div class="text-xs text-muted">Mutual Information</div>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="font-bold mono text-lg" style="color:#60A5FA">—</div>
+            </td>
+            <td class="text-center text-xs text-muted">Information-theoretic</td>
+            <td class="text-center text-xs text-muted">Top-k ranking</td>
+            <td class="text-center">
+              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2);color:#60A5FA">BASELINE</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-3">
+                <div style="width:8px;height:8px;border-radius:2px;background:#F472B6"></div>
+                <div>
+                  <div class="font-bold">FP-Growth</div>
+                  <div class="text-xs text-muted">Pattern Mining</div>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="font-bold mono text-lg" style="color:#F472B6">0.5370</div>
+            </td>
+            <td class="text-center text-xs text-muted">Association rules</td>
+            <td class="text-center text-xs text-muted">Frequent patterns</td>
+            <td class="text-center">
+              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(244,114,182,0.1);border:1px solid rgba(244,114,182,0.2);color:#F472B6">MINING</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========== INTERACTIVE RESULTS DASHBOARD ========== -->
+<section id="results" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">05 / Results Dashboard</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Performance Metrics</h2>
+      <p class="text-muted max-w-xl mx-auto">Interactive visualization of model performance across all evaluated biomarker selection strategies.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 fade-up">
+      <!-- BAR CHART -->
+      <div class="glass-card p-6">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <div class="mono text-xs text-primary opacity-60 mb-1">AUC COMPARISON</div>
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Area Under ROC Curve</div>
+          </div>
+          <div class="metric-badge">Higher is Better</div>
+        </div>
+        <canvas id="bar-chart-canvas" width="400" height="260"></canvas>
+      </div>
+
+      <!-- ROC CURVES -->
+      <div class="glass-card p-6">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <div class="mono text-xs text-primary opacity-60 mb-1">ROC CURVES</div>
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Receiver Operating Characteristic</div>
+          </div>
+          <div class="metric-badge">Publication Quality</div>
+        </div>
+        <svg id="roc-svg" viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;"></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== QUANTUM OPTIMIZATION ========== -->
+<section id="quantum" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,229,255,0.03),transparent)">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">06 / Quantum Optimization</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">QAOA Formulation</h2>
+      <p class="text-muted max-w-2xl mx-auto">The Quantum Approximate Optimization Algorithm encodes biomarker selection as a Quadratic Unconstrained Binary Optimization (QUBO) problem, exploiting quantum superposition to explore exponentially large solution spaces.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 mb-12 fade-up">
+      <div class="param-block">
+        <div class="param-symbol">α</div>
+        <div class="mono text-xs text-primary opacity-60 mt-3 mb-2">FEATURE RELEVANCE</div>
+        <div class="text-sm text-muted leading-relaxed">Reward for selecting genes with high mutual information relative to the cancer label</div>
+        <div class="mt-3 mono text-xs" style="color:rgba(0,229,255,0.5)">∑ᵢ αᵢ · I(Gᵢ ; Y) · xᵢ</div>
+      </div>
+      <div class="param-block" style="border-color:rgba(124,58,237,0.2);background:rgba(124,58,237,0.04)">
+        <div class="param-symbol" style="background:linear-gradient(135deg,#7C3AED,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">β</div>
+        <div class="mono text-xs mt-3 mb-2" style="color:var(--secondary);opacity:0.7">REDUNDANCY PENALTY</div>
+        <div class="text-sm text-muted leading-relaxed">Penalize co-selection of highly correlated genes to maximize information diversity</div>
+        <div class="mt-3 mono text-xs" style="color:rgba(124,58,237,0.5)">− β · ∑ᵢ≠ⱼ C(Gᵢ,Gⱼ) · xᵢxⱼ</div>
+      </div>
+      <div class="param-block" style="border-color:rgba(0,255,163,0.2);background:rgba(0,255,163,0.04)">
+        <div class="param-symbol" style="background:linear-gradient(135deg,#00FFA3,#00E5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">γ</div>
+        <div class="mono text-xs mt-3 mb-2" style="color:var(--accent);opacity:0.7">SPARSITY PENALTY</div>
+        <div class="text-sm text-muted leading-relaxed">Enforce a compact feature subset — target selection of exactly k biomarker genes</div>
+        <div class="mt-3 mono text-xs" style="color:rgba(0,255,163,0.5)">− γ · (∑ᵢ xᵢ − k)²</div>
+      </div>
+    </div>
+
+    <!-- QUBO FORMULA -->
+    <div class="glass-card p-6 mb-12 fade-up" style="border-color:rgba(0,229,255,0.15)">
+      <div class="mono text-xs text-primary opacity-60 mb-4">QUBO OBJECTIVE FUNCTION</div>
+      <div class="space-y-2">
+        <div class="qubo-line">H(<strong>x</strong>) = <span>−α</span> · ∑ᵢ <em>MI(Gᵢ)</em> · xᵢ</div>
+        <div class="qubo-line pl-8"><span>+β</span> · ∑ᵢ&lt;ⱼ <em>Corr(Gᵢ,Gⱼ)</em> · xᵢ · xⱼ</div>
+        <div class="qubo-line pl-8"><span>+γ</span> · <em>(∑ᵢ xᵢ − k)²</em></div>
+      </div>
+      <div class="mt-4 text-xs text-muted">where xᵢ ∈ {0,1} denotes gene selection, k=10 is the target subset size, and the optimization is performed via QAOA with p=2 layers.</div>
+    </div>
+
+    <!-- QUANTUM CIRCUIT -->
+    <div class="glass-card p-6 fade-up">
+      <div class="mono text-xs text-primary opacity-60 mb-6">QAOA CIRCUIT ILLUSTRATION (p=2 layers)</div>
+      <div class="overflow-x-auto">
+        <svg id="quantum-circuit" viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:auto;">
+          <!-- Background -->
+          <rect width="680" height="220" fill="transparent"/>
+          
+          <!-- Qubits labels -->
+          <text x="10" y="38" class="circuit-text">|q₀⟩</text>
+          <text x="10" y="78" class="circuit-text">|q₁⟩</text>
+          <text x="10" y="118" class="circuit-text">|q₂⟩</text>
+          <text x="10" y="158" class="circuit-text">|q₃⟩</text>
+          <text x="10" y="198" class="circuit-text">|q₄⟩</text>
+          
+          <!-- Wires -->
+          <line x1="45" y1="35" x2="655" y2="35" class="circuit-wire"/>
+          <line x1="45" y1="75" x2="655" y2="75" class="circuit-wire"/>
+          <line x1="45" y1="115" x2="655" y2="115" class="circuit-wire"/>
+          <line x1="45" y1="155" x2="655" y2="155" class="circuit-wire"/>
+          <line x1="45" y1="195" x2="655" y2="195" class="circuit-wire"/>
+
+          <!-- H gates (Hadamard) -->
+          <g id="hadamard-gates">
+            <rect x="50" y="22" width="28" height="26" rx="4" class="circuit-gate"/>
+            <text x="64" y="39" class="circuit-text" text-anchor="middle">H</text>
+            <rect x="50" y="62" width="28" height="26" rx="4" class="circuit-gate"/>
+            <text x="64" y="79" class="circuit-text" text-anchor="middle">H</text>
+            <rect x="50" y="102" width="28" height="26" rx="4" class="circuit-gate"/>
+            <text x="64" y="119" class="circuit-text" text-anchor="middle">H</text>
+            <rect x="50" y="142" width="28" height="26" rx="4" class="circuit-gate"/>
+            <text x="64" y="159" class="circuit-text" text-anchor="middle">H</text>
+            <rect x="50" y="182" width="28" height="26" rx="4" class="circuit-gate"/>
+            <text x="64" y="199" class="circuit-text" text-anchor="middle">H</text>
+          </g>
+
+          <!-- Layer 1 label -->
+          <text x="160" y="12" font-family="Space Mono" font-size="8" fill="rgba(0,229,255,0.4)" text-anchor="middle">COST LAYER 1</text>
+          <line x1="100" y1="15" x2="220" y2="15" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
+
+          <!-- Layer 1 RZ gates -->
+          <rect x="100" y="22" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+          <text x="117" y="39" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₁)</text>
+          <rect x="100" y="62" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+          <text x="117" y="79" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₁)</text>
+          <rect x="100" y="102" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+          <text x="117" y="119" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₁)</text>
+          <rect x="100" y="142" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+          <text x="117" y="159" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₁)</text>
+          <rect x="100" y="182" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+          <text x="117" y="199" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₁)</text>
+
+          <!-- CNOT gates layer 1 -->
+          <circle cx="175" cy="35" r="5" fill="#00E5FF" opacity="0.8"/>
+          <line x1="175" y1="35" x2="175" y2="75" stroke="#00E5FF" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+          <circle cx="175" cy="75" r="8" fill="none" stroke="#00E5FF" stroke-width="1.5" opacity="0.7"/>
+          <line x1="167" y1="75" x2="183" y2="75" stroke="#00E5FF" stroke-width="1.5" opacity="0.7"/>
+          <line x1="175" y1="67" x2="175" y2="83" stroke="#00E5FF" stroke-width="1.5" opacity="0.7"/>
+
+          <circle cx="200" cy="115" r="5" fill="#7C3AED" opacity="0.8"/>
+          <line x1="200" y1="115" x2="200" y2="155" stroke="#7C3AED" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+          <circle cx="200" cy="155" r="8" fill="none" stroke="#7C3AED" stroke-width="1.5" opacity="0.7"/>
+          <line x1="192" y1="155" x2="208" y2="155" stroke="#7C3AED" stroke-width="1.5" opacity="0.7"/>
+          <line x1="200" y1="147" x2="200" y2="163" stroke="#7C3AED" stroke-width="1.5" opacity="0.7"/>
+
+          <!-- Layer 1 MIXER label -->
+          <text x="300" y="12" font-family="Space Mono" font-size="8" fill="rgba(0,255,163,0.4)" text-anchor="middle">MIXER LAYER 1</text>
+          <line x1="240" y1="15" x2="360" y2="15" stroke="rgba(0,255,163,0.2)" stroke-width="1"/>
+
+          <!-- Rx gates layer 1 -->
+          <rect x="240" y="22" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="257" y="39" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₁)</text>
+          <rect x="240" y="62" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="257" y="79" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₁)</text>
+          <rect x="240" y="102" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="257" y="119" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₁)</text>
+          <rect x="240" y="142" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="257" y="159" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₁)</text>
+          <rect x="240" y="182" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="257" y="199" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₁)</text>
+
+          <!-- Layer 2 -->
+          <text x="440" y="12" font-family="Space Mono" font-size="8" fill="rgba(0,229,255,0.4)" text-anchor="middle">COST LAYER 2</text>
+          <line x1="380" y1="15" x2="500" y2="15" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
+
+          <rect x="380" y="22" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+          <text x="397" y="39" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₂)</text>
+          <rect x="380" y="62" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+          <text x="397" y="79" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₂)</text>
+          <rect x="380" y="102" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+          <text x="397" y="119" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₂)</text>
+          <rect x="380" y="142" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+          <text x="397" y="159" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₂)</text>
+          <rect x="380" y="182" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+          <text x="397" y="199" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₂)</text>
+
+          <!-- Mixer layer 2 -->
+          <text x="575" y="12" font-family="Space Mono" font-size="8" fill="rgba(0,255,163,0.4)" text-anchor="middle">MIXER LAYER 2 + MEASURE</text>
+          <line x1="505" y1="15" x2="655" y2="15" stroke="rgba(0,255,163,0.2)" stroke-width="1"/>
+
+          <rect x="510" y="22" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="527" y="39" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₂)</text>
+          <rect x="510" y="62" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="527" y="79" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₂)</text>
+          <rect x="510" y="102" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="527" y="119" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₂)</text>
+          <rect x="510" y="142" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="527" y="159" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₂)</text>
+          <rect x="510" y="182" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="527" y="199" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₂)</text>
+
+          <!-- Measure gates -->
+          <rect x="560" y="22" width="28" height="26" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="574" y="37" font-family="Space Mono" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">M</text>
+          <rect x="560" y="62" width="28" height="26" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="574" y="77" font-family="Space Mono" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">M</text>
+          <rect x="560" y="102" width="28" height="26" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="574" y="117" font-family="Space Mono" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">M</text>
+          <rect x="560" y="142" width="28" height="26" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="574" y="157" font-family="Space Mono" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">M</text>
+          <rect x="560" y="182" width="28" height="26" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="574" y="197" font-family="Space Mono" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">M</text>
+
+          <!-- Classical output lines -->
+          <line x1="588" y1="35" x2="650" y2="35" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="588" y1="75" x2="650" y2="75" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="588" y1="115" x2="650" y2="115" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="588" y1="155" x2="650" y2="155" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="588" y1="195" x2="650" y2="195" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BIOMARKER DISCOVERY ========== -->
+<section id="biomarkers" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">07 / Biomarker Discovery</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Quantum-Selected Gene Candidates</h2>
+      <p class="text-muted max-w-xl mx-auto">QAOA identified 10 candidate biomarkers from 16,519 genes — a 99.9% reduction in the feature search space.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 fade-up">
+      
+      <div class="gene-card">
+        <div class="gene-name mb-2">TP53</div>
+        <div class="text-xs text-muted mb-3 leading-relaxed">Tumor suppressor — the "guardian of the genome." Most commonly mutated gene in all cancers.</div>
+        <div class="metric-badge">Tumor Suppressor</div>
+      </div>
+
+      <div class="gene-card">
+        <div class="gene-name mb-2">KMT2C</div>
+        <div class="text-xs text-muted mb-3 leading-relaxed">Histone H3K4 methyltransferase — epigenetic regulator frequently mutated in breast cancer.</div>
+        <div class="metric-badge" style="border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.08);color:#a78bfa">Epigenetic</div>
+      </div>
+
+      <div class="gene-card">
+        <div class="gene-name mb-2">PIK3CA</div>
+        <div class="text-xs text-muted mb-3 leading-relaxed">PI3K catalytic subunit — oncogene driving cell proliferation and survival signaling.</div>
+        <div class="metric-badge" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">Oncogene</div>
+      </div>
+
+      <div class="gene-card">
+        <div class="gene-name mb-2">GATA3</div>
+        <div class="text-xs text-muted mb-3 leading-relaxed">Transcription factor essential for luminal breast differentiation. Second most mutated in ER+ BRCA.</div>
+        <div class="metric-badge">Transcription</div>
+      </div>
+
+      <div class="gene-card">
+        <div class="gene-name mb-2">BRCA1</div>
+        <div class="text-xs text-muted mb-3 leading-relaxed">DNA repair and genome stability. Germline mutations confer high hereditary breast cancer risk.</div>
+        <div class="metric-badge" style="border-color:rgba(236,72,153,0.3);background:rgba(236,72,153,0.08);color:#F472B6">DNA Repair</div>
+      </div>
+
+      <div class="gene-card">
+        <div class="gene-name mb-2">BRCA2</div>
+        <div class="text-xs text-muted mb-3 leading-relaxed">Homologous recombination repair. Mutation carriers have ~70% lifetime breast cancer risk.</div>
+        <div class="metric-badge" style="border-color:rgba(236,72,153,0.3);background:rgba(236,72,153,0.08);color:#F472B6">DNA Repair</div>
+      </div>
+
+      <div class="gene-card">
+        <div class="gene-name mb-2">CDH1</div>
+        <div class="text-xs text-muted mb-3 leading-relaxed">E-cadherin — cell adhesion molecule. Loss drives epithelial-mesenchymal transition and invasion.</div>
+        <div class="metric-badge" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">Adhesion</div>
+      </div>
+
+      <div class="gene-card">
+        <div class="gene-name mb-2">MAP3K1</div>
+        <div class="text-xs text-muted mb-3 leading-relaxed">MAPK pathway kinase — regulates cell stress response and is a recurrent mutation in luminal BRCA.</div>
+        <div class="metric-badge" style="border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.08);color:#a78bfa">Signaling</div>
+      </div>
+
+      <div class="gene-card">
+        <div class="gene-name mb-2">AKT1</div>
+        <div class="text-xs text-muted mb-3 leading-relaxed">Serine/threonine kinase — central hub of PI3K/AKT/mTOR survival pathway in breast cancer.</div>
+        <div class="metric-badge" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">Kinase</div>
+      </div>
+
+      <div class="gene-card">
+        <div class="gene-name mb-2">PTEN</div>
+        <div class="text-xs text-muted mb-3 leading-relaxed">Phosphatase tumor suppressor counteracting PI3K signaling. Frequent loss in triple-negative BRCA.</div>
+        <div class="metric-badge">Suppressor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BENCHMARK VALIDATION ========== -->
+<section id="benchmark" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(124,58,237,0.03),transparent)">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">08 / Benchmark Validation</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Synthetic Benchmark Framework</h2>
+      <p class="text-muted max-w-xl mx-auto">A three-regime benchmark assesses method robustness across varying signal-to-noise conditions.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 fade-up">
+      
+      <div class="regime-card regime-easy glass-card">
+        <div class="mono text-xs mb-3" style="color:var(--accent)">EASY REGIME</div>
+        <div class="text-xl font-bold mb-4" style="font-family:'Syne',sans-serif;">High SNR<br><span class="text-muted text-base font-normal">Clear signal</span></div>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">Precision</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:92%;height:100%;background:var(--accent);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:var(--accent)">0.92</span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">Recall</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:90%;height:100%;background:var(--accent);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:var(--accent)">0.90</span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">F1-Score</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:91%;height:100%;background:var(--accent);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:var(--accent)">0.91</span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">Feature Recovery</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:85%;height:100%;background:var(--accent);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:var(--accent)">85%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="regime-card regime-medium glass-card">
+        <div class="mono text-xs mb-3" style="color:var(--primary)">MEDIUM REGIME</div>
+        <div class="text-xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Moderate SNR<br><span class="text-muted text-base font-normal">Realistic noise</span></div>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">Precision</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:78%;height:100%;background:var(--primary);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:var(--primary)">0.78</span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">Recall</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:74%;height:100%;background:var(--primary);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:var(--primary)">0.74</span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">F1-Score</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:76%;height:100%;background:var(--primary);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:var(--primary)">0.76</span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">Feature Recovery</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:70%;height:100%;background:var(--primary);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:var(--primary)">70%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="regime-card regime-hard glass-card">
+        <div class="mono text-xs mb-3" style="color:#a78bfa">HARD REGIME</div>
+        <div class="text-xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Low SNR<br><span class="text-muted text-base font-normal">High noise floor</span></div>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">Precision</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:61%;height:100%;background:var(--secondary);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:#a78bfa">0.61</span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">Recall</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:58%;height:100%;background:var(--secondary);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:#a78bfa">0.58</span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">F1-Score</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:59%;height:100%;background:var(--secondary);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:#a78bfa">0.59</span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-muted">Feature Recovery</span>
+            <div class="flex items-center gap-2">
+              <div style="width:80px;height:4px;border-radius:2px;background:rgba(255,255,255,0.05);overflow:hidden">
+                <div style="width:50%;height:100%;background:var(--secondary);border-radius:2px"></div>
+              </div>
+              <span class="mono text-xs" style="color:#a78bfa">50%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== KEY FINDINGS ========== -->
+<section id="findings" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">09 / Key Findings</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Research Outcomes</h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 fade-up">
+      <div class="stat-block">
+        <div class="counter text-4xl font-bold mb-3" style="color:var(--primary);font-family:'Syne',sans-serif;" data-target="90" data-suffix="%">0%</div>
+        <div class="mono text-xs text-muted tracking-wide mb-2">FEATURE REDUCTION</div>
+        <div class="text-xs text-muted opacity-70">From 16,519 genes to 10 candidates</div>
+      </div>
+      <div class="stat-block">
+        <div class="text-4xl font-bold mb-3 grad-accent" style="font-family:'Syne',sans-serif;">0.7701</div>
+        <div class="mono text-xs text-muted tracking-wide mb-2">BEST AUC</div>
+        <div class="text-xs text-muted opacity-70">LASSO regularization baseline</div>
+      </div>
+      <div class="stat-block">
+        <div class="counter text-4xl font-bold mb-3 grad-warm" style="font-family:'Syne',sans-serif;" data-target="16519" data-suffix="">0</div>
+        <div class="mono text-xs text-muted tracking-wide mb-2">ORIGINAL GENES</div>
+        <div class="text-xs text-muted opacity-70">TCGA-BRCA dimensionality</div>
+      </div>
+      <div class="stat-block">
+        <div class="text-4xl font-bold mb-3" style="font-family:'Syne',sans-serif;color:var(--accent)">10</div>
+        <div class="mono text-xs text-muted tracking-wide mb-2">QUANTUM CANDIDATES</div>
+        <div class="text-xs text-muted opacity-70">QAOA final biomarker selection</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTRIBUTIONS ========== -->
+<section id="contributions" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,229,255,0.02),transparent)">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">10 / Contributions</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Scientific Contributions</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 fade-up">
+      
+      <div class="contrib-card">
+        <div class="mono text-xs text-primary opacity-40 mb-3">C.01</div>
+        <h4 class="font-bold mb-2" style="font-family:'Syne',sans-serif;">Binary Mutation Dataset</h4>
+        <p class="text-muted text-sm leading-relaxed">Construction of a standardized binary mutation matrix from raw TCGA-BRCA MAF files, including quality control and filtering pipelines.</p>
+      </div>
+      
+      <div class="contrib-card">
+        <div class="mono text-xs text-primary opacity-40 mb-3">C.02</div>
+        <h4 class="font-bold mb-2" style="font-family:'Syne',sans-serif;">Synthetic Benchmark Framework</h4>
+        <p class="text-muted text-sm leading-relaxed">A three-regime synthetic dataset generator enabling reproducible evaluation of feature selection methods under controlled noise conditions.</p>
+      </div>
+      
+      <div class="contrib-card">
+        <div class="mono text-xs text-primary opacity-40 mb-3">C.03</div>
+        <h4 class="font-bold mb-2" style="font-family:'Syne',sans-serif;">Hybrid Quantum-Classical Pipeline</h4>
+        <p class="text-muted text-sm leading-relaxed">End-to-end integration of quantum optimization within a classical genomics workflow — from mutation data to classification evaluation.</p>
+      </div>
+      
+      <div class="contrib-card" style="border-color:rgba(0,229,255,0.12)">
+        <div class="mono text-xs text-primary opacity-40 mb-3">C.04</div>
+        <h4 class="font-bold mb-2 grad-primary" style="font-family:'Syne',sans-serif;">QAOA Biomarker Selection</h4>
+        <p class="text-muted text-sm leading-relaxed">First application of QUBO-formulated QAOA to TCGA-BRCA genomic biomarker selection, reducing search space by 99.9%.</p>
+      </div>
+      
+      <div class="contrib-card">
+        <div class="mono text-xs text-primary opacity-40 mb-3">C.05</div>
+        <h4 class="font-bold mb-2" style="font-family:'Syne',sans-serif;">FP-Growth Pattern Discovery</h4>
+        <p class="text-muted text-sm leading-relaxed">Application of frequent pattern mining to mutation co-occurrence for alternative combinatorial biomarker discovery and feature engineering.</p>
+      </div>
+      
+      <div class="contrib-card">
+        <div class="mono text-xs text-primary opacity-40 mb-3">C.06</div>
+        <h4 class="font-bold mb-2" style="font-family:'Syne',sans-serif;">Comparative Evaluation Framework</h4>
+        <p class="text-muted text-sm leading-relaxed">Systematic comparison of MI, LASSO, QAOA, and FP-Growth under unified experimental conditions with AUC, F1, and ROC analysis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FUTURE WORK ========== -->
+<section id="future" class="py-28 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">11 / Future Work</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Research Roadmap</h2>
+    </div>
+
+    <div class="space-y-0 fade-up">
+
+      <div class="roadmap-item pb-8">
+        <div class="roadmap-dot"></div>
+        <div class="glass-card p-5">
+          <div class="flex items-start justify-between mb-2">
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Larger Quantum Hardware</div>
+            <div class="metric-badge">Near-term</div>
+          </div>
+          <p class="text-muted text-sm leading-relaxed">Scaling QAOA to real quantum processors (IBM Quantum, IonQ) with 50–100+ qubits enables larger candidate gene subsets and more complex QUBO formulations.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item pb-8">
+        <div class="roadmap-dot" style="border-color:var(--secondary);box-shadow:0 0 12px rgba(124,58,237,0.4)"></div>
+        <div class="glass-card p-5">
+          <div class="flex items-start justify-between mb-2">
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Multi-Omics Integration</div>
+            <div class="metric-badge" style="border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.08);color:#a78bfa">Mid-term</div>
+          </div>
+          <p class="text-muted text-sm leading-relaxed">Extending the pipeline to incorporate RNA-seq expression, copy number variation, and methylation data for a holistic multi-modal biomarker selection framework.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item pb-8">
+        <div class="roadmap-dot" style="border-color:var(--accent);box-shadow:0 0 12px rgba(0,255,163,0.4)"></div>
+        <div class="glass-card p-5">
+          <div class="flex items-start justify-between mb-2">
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Advanced QUBO Formulations</div>
+            <div class="metric-badge" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">Research</div>
+          </div>
+          <p class="text-muted text-sm leading-relaxed">Incorporating pathway-level constraints, protein-protein interaction networks, and biologically-informed penalty terms directly into the QUBO objective.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item pb-8">
+        <div class="roadmap-dot" style="border-color:#F472B6;box-shadow:0 0 12px rgba(244,114,182,0.4)"></div>
+        <div class="glass-card p-5">
+          <div class="flex items-start justify-between mb-2">
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Deep Learning Integration</div>
+            <div class="metric-badge" style="border-color:rgba(244,114,182,0.3);background:rgba(244,114,182,0.08);color:#F472B6">Long-term</div>
+          </div>
+          <p class="text-muted text-sm leading-relaxed">Replacing logistic regression with graph neural networks or transformers operating on quantum-selected gene interaction graphs for improved prediction.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-dot" style="border-color:#60A5FA;box-shadow:0 0 12px rgba(96,165,250,0.4)"></div>
+        <div class="glass-card p-5">
+          <div class="flex items-start justify-between mb-2">
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">External Validation Cohorts</div>
+            <div class="metric-badge" style="border-color:rgba(96,165,250,0.3);background:rgba(96,165,250,0.08);color:#60A5FA">Clinical</div>
+          </div>
+          <p class="text-muted text-sm leading-relaxed">Validating the 10 QAOA-selected biomarkers in independent cohorts (METABRIC, CBCGA) and prospective clinical settings to confirm translational relevance.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== AUTHORS ========== -->
+<section id="authors" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,229,255,0.02),transparent)">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <div class="section-label mb-4">12 / Research Team</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">About the Authors</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 fade-up">
+      
+      <div class="author-card">
+        <div class="author-avatar">SE</div>
+        <div class="metric-badge mb-3">Author</div>
+        <h3 class="text-lg font-bold mb-1" style="font-family:'Syne',sans-serif;">Seif Eddine Addar</h3>
+        <div class="text-muted text-sm mb-4">Master's candidate in Data Science & NLP, specializing in quantum-classical hybrid algorithms for computational biology.</div>
+        <div class="divider my-4"></div>
+        <div class="text-xs text-muted">Saad Dahlab University<br>Blida 1 · Algeria · 2026</div>
+      </div>
+
+      <div class="author-card" style="border-color:rgba(124,58,237,0.2)">
+        <div class="author-avatar" style="background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(236,72,153,0.2));border-color:rgba(124,58,237,0.4);color:#a78bfa">LR</div>
+        <div class="metric-badge mb-3" style="border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.08);color:#a78bfa">Author</div>
+        <h3 class="text-lg font-bold mb-1" style="font-family:'Syne',sans-serif;">Lokmane Rabehi</h3>
+        <div class="text-muted text-sm mb-4">Master's candidate in Data Science & NLP, focusing on biomarker discovery, pattern mining, and machine learning for oncogenomics.</div>
+        <div class="divider my-4"></div>
+        <div class="text-xs text-muted">Saad Dahlab University<br>Blida 1 · Algeria · 2026</div>
+      </div>
+
+      <div class="author-card" style="border-color:rgba(0,255,163,0.15)">
+        <div class="author-avatar" style="background:linear-gradient(135deg,rgba(0,255,163,0.15),rgba(0,229,255,0.15));border-color:rgba(0,255,163,0.4);color:#00FFA3">CH</div>
+        <div class="metric-badge mb-3" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">Supervisor</div>
+        <h3 class="text-lg font-bold mb-1" style="font-family:'Syne',sans-serif;">Dr. Celia Hireche</h3>
+        <div class="text-muted text-sm mb-4">Research supervisor and faculty advisor. Expert in computational methods, bioinformatics, and applied machine learning at Blida 1.</div>
+        <div class="divider my-4"></div>
+        <div class="text-xs text-muted">Saad Dahlab University<br>Blida 1 · Algeria</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer style="background:rgba(5,8,22,0.95);border-top:1px solid var(--border)" class="py-16 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-3 gap-10 mb-12">
+      <div>
+        <div class="mono text-xs text-primary opacity-60 mb-3 tracking-widest">INSTITUTION</div>
+        <div class="font-bold mb-1" style="font-family:'Syne',sans-serif;">Saad Dahlab University<br>of Blida 1</div>
+        <div class="text-muted text-sm mt-2">Faculty of Sciences<br>Department of Computer Science<br>Data Science & NLP Program</div>
+      </div>
+      <div>
+        <div class="mono text-xs text-primary opacity-60 mb-3 tracking-widest">RESEARCH</div>
+        <div class="font-bold mb-2" style="font-family:'Syne',sans-serif;">Master's Thesis — 2026</div>
+        <div class="text-muted text-sm leading-relaxed">Hybrid Classical–Quantum Selection of Genetic Biomarkers for Breast Cancer Detection</div>
+      </div>
+      <div>
+        <div class="mono text-xs text-primary opacity-60 mb-3 tracking-widest">DATASET & TOOLS</div>
+        <div class="space-y-1">
+          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);color:var(--muted)">TCGA-BRCA</div>
+          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);color:var(--muted)">Qiskit</div>
+          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);color:var(--muted)">scikit-learn</div>
+          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);color:var(--muted)">mlxtend</div>
+          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);color:var(--muted)">Python 3.11</div>
+        </div>
+      </div>
+    </div>
+    <div class="divider mb-8"></div>
+    <div class="flex flex-wrap items-center justify-between gap-4 text-xs text-muted">
+      <div class="mono">© 2026 Addar · Rabehi · Saad Dahlab University of Blida 1</div>
+      <div class="mono opacity-50">Supervised by Dr. Celia Hireche</div>
+      <div class="mono opacity-40">Data Science & NLP · Master's Thesis</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+/* ---- PARTICLES ---- */
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let animFrame;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.size = Math.random() * 1.5 + 0.3;
+    this.opacity = Math.random() * 0.5 + 0.1;
+    this.color = Math.random() > 0.6 ? '#00E5FF' : Math.random() > 0.5 ? '#7C3AED' : '#00FFA3';
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+function drawConnections() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 100) {
+        ctx.save();
+        ctx.globalAlpha = (1 - dist / 100) * 0.08;
+        ctx.strokeStyle = '#00E5FF';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  drawConnections();
+  animFrame = requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+/* ---- NAVBAR ---- */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+/* ---- SCROLL ANIMATIONS ---- */
+const fadeEls = document.querySelectorAll('.fade-up');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 40);
+    }
+  });
+}, { threshold: 0.1 });
+fadeEls.forEach(el => observer.observe(el));
+
+/* ---- ANIMATED COUNTERS ---- */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const startTime = performance.now();
+  const startVal = 0;
+  
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(startVal + (target - startVal) * eased);
+    el.textContent = current.toLocaleString() + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.animated) {
+      entry.target.dataset.animated = true;
+      animateCounter(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+/* ---- BAR CHART ---- */
+function drawBarChart() {
+  const canvas = document.getElementById('bar-chart-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  
+  const data = [
+    { label: 'LASSO', value: 0.7701, color: '#00E5FF' },
+    { label: 'MI + LR', value: 0.68, color: '#60A5FA' },
+    { label: 'QAOA', value: 0.6727, color: '#7C3AED' },
+    { label: 'FP-Growth', value: 0.5370, color: '#F472B6' },
+  ];
+
+  const W = canvas.width, H = canvas.height;
+  const padL = 50, padR = 20, padT = 20, padB = 50;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+  const barGap = 20;
+  const barW = (chartW - barGap * (data.length - 1)) / data.length;
+  const minVal = 0.4, maxVal = 0.9;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid lines
+  for (let i = 0; i <= 5; i++) {
+    const y = padT + chartH - (i / 5) * chartH;
+    const val = (minVal + (maxVal - minVal) * (i / 5)).toFixed(2);
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+    ctx.lineWidth = 1;
+    ctx.moveTo(padL, y);
+    ctx.lineTo(padL + chartW, y);
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(148,163,184,0.7)';
+    ctx.font = '10px Space Mono, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(val, padL - 6, y + 4);
+  }
+
+  // Bars with animation
+  let progress = 0;
+  function drawBars(prog) {
+    ctx.clearRect(0, 0, W, H);
+    
+    // Redraw grid
+    for (let i = 0; i <= 5; i++) {
+      const y = padT + chartH - (i / 5) * chartH;
+      const val = (minVal + (maxVal - minVal) * (i / 5)).toFixed(2);
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = 1;
+      ctx.moveTo(padL, y);
+      ctx.lineTo(padL + chartW, y);
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(148,163,184,0.7)';
+      ctx.font = '10px Space Mono, monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText(val, padL - 6, y + 4);
+    }
+
+    data.forEach((d, i) => {
+      const x = padL + i * (barW + barGap);
+      const normalizedH = ((d.value - minVal) / (maxVal - minVal)) * chartH * prog;
+      const y = padT + chartH - normalizedH;
+      
+      // Bar glow
+      ctx.save();
+      ctx.shadowColor = d.color;
+      ctx.shadowBlur = 12;
+      
+      // Gradient fill
+      const grad = ctx.createLinearGradient(x, y, x, padT + chartH);
+      grad.addColorStop(0, d.color);
+      grad.addColorStop(1, d.color + '33');
+      ctx.fillStyle = grad;
+      
+      const radius = Math.min(6, barW * 0.1);
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + barW - radius, y);
+      ctx.quadraticCurveTo(x + barW, y, x + barW, y + radius);
+      ctx.lineTo(x + barW, padT + chartH);
+      ctx.lineTo(x, padT + chartH);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+      
+      // Value label
+      if (prog > 0.8) {
+        ctx.fillStyle = d.color;
+        ctx.font = 'bold 11px Space Mono, monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(d.value.toFixed(4), x + barW / 2, y - 8);
+      }
+      
+      // X label
+      ctx.fillStyle = 'rgba(148,163,184,0.8)';
+      ctx.font = '10px Space Mono, monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(d.label, x + barW / 2, padT + chartH + 20);
+    });
+
+    // Highlight best
+    ctx.strokeStyle = 'rgba(0,229,255,0.2)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    const bestY = padT + chartH - ((0.7701 - minVal) / (maxVal - minVal)) * chartH;
+    ctx.beginPath();
+    ctx.moveTo(padL, bestY);
+    ctx.lineTo(padL + chartW, bestY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Animate bars on intersection
+  const barObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      const start = performance.now();
+      const dur = 1000;
+      function tick(now) {
+        progress = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        drawBars(ease);
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      barObs.disconnect();
+    }
+  }, { threshold: 0.3 });
+  barObs.observe(canvas);
+  drawBars(0);
+}
+drawBarChart();
+
+/* ---- ROC CURVES ---- */
+function drawROC() {
+  const svg = document.getElementById('roc-svg');
+  if (!svg) return;
+  
+  const W = 380, H = 260;
+  const padL = 40, padR = 15, padT = 15, padB = 35;
+  const cW = W - padL - padR;
+  const cH = H - padT - padB;
+
+  // Helper: generate ROC-like curve from AUC
+  function generateROC(auc) {
+    const pts = [];
+    for (let i = 0; i <= 50; i++) {
+      const fpr = i / 50;
+      // Smooth curve approximation
+      const tpr = Math.pow(fpr, 1 / (2 * auc - 0.5 * auc)) * (0.5 + auc * 0.5) + Math.random() * 0.02 - 0.01;
+      pts.push([Math.min(1, Math.max(0, fpr)), Math.min(1, Math.max(fpr, tpr))]);
+    }
+    pts[0] = [0, 0];
+    pts[50] = [1, 1];
+    pts.sort((a, b) => a[0] - b[0]);
+    return pts;
+  }
+
+  function toSVGX(fpr) { return padL + fpr * cW; }
+  function toSVGY(tpr) { return padT + cH - tpr * cH; }
+
+  let svgContent = '';
+
+  // Grid
+  for (let i = 0; i <= 4; i++) {
+    const x = padL + (i / 4) * cW;
+    const y = padT + (i / 4) * cH;
+    const val = (i / 4).toFixed(2);
+    svgContent += `<line x1="${x}" y1="${padT}" x2="${x}" y2="${padT + cH}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+    svgContent += `<line x1="${padL}" y1="${y}" x2="${padL + cW}" y2="${y}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+    svgContent += `<text x="${x}" y="${padT + cH + 14}" font-family="Space Mono" font-size="8" fill="rgba(148,163,184,0.6)" text-anchor="middle">${val}</text>`;
+    if (i > 0) svgContent += `<text x="${padL - 6}" y="${y + 3}" font-family="Space Mono" font-size="8" fill="rgba(148,163,184,0.6)" text-anchor="end">${(1 - i / 4).toFixed(2)}</text>`;
+  }
+
+  // Diagonal reference
+  svgContent += `<line x1="${padL}" y1="${padT + cH}" x2="${padL + cW}" y2="${padT}" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="4,4"/>`;
+
+  // Axes labels
+  svgContent += `<text x="${padL + cW / 2}" y="${H - 2}" font-family="Space Mono" font-size="8" fill="rgba(148,163,184,0.6)" text-anchor="middle">False Positive Rate</text>`;
+  svgContent += `<text x="9" y="${padT + cH / 2}" font-family="Space Mono" font-size="8" fill="rgba(148,163,184,0.6)" text-anchor="middle" transform="rotate(-90,9,${padT + cH / 2})">True Positive Rate</text>`;
+
+  // Curves
+  const curves = [
+    { label: 'LASSO', auc: 0.7701, color: '#00E5FF' },
+    { label: 'MI+LR', auc: 0.680, color: '#60A5FA' },
+    { label: 'QAOA', auc: 0.6727, color: '#7C3AED' },
+    { label: 'FP-Growth', auc: 0.5370, color: '#F472B6' },
+  ];
+
+  curves.forEach(curve => {
+    const pts = generateROC(curve.auc);
+    const pathD = pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${toSVGX(p[0]).toFixed(1)},${toSVGY(p[1]).toFixed(1)}`).join(' ');
+    svgContent += `<path d="${pathD}" stroke="${curve.color}" stroke-width="2" fill="none" opacity="0.85"/>`;
+  });
+
+  // Legend
+  curves.forEach((c, i) => {
+    const lx = padL + 8;
+    const ly = padT + 10 + i * 18;
+    svgContent += `<rect x="${lx}" y="${ly - 6}" width="16" height="3" rx="1.5" fill="${c.color}" opacity="0.9"/>`;
+    svgContent += `<text x="${lx + 22}" y="${ly}" font-family="Space Mono" font-size="8.5" fill="rgba(248,250,252,0.8)">${c.label} (${c.auc})</text>`;
+  });
+
+  svg.innerHTML = svgContent;
+}
+drawROC();
+
+</script>
+</body>
+</html>
