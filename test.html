@@ -6,18 +6,18 @@
 <title>Hybrid Classical–Quantum Selection of Genetic Biomarkers | Addar & Rabehi 2026</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --bg: #F3EDE2;
-    --card: #FAF6EE;
-    --border: rgba(0, 70, 67, 0.12);
-    --primary: #004643;
-    --secondary: #002B29;
-    --accent: #C9A882;
-    --text: #1A2E2D;
-    --muted: #5C7A78;
+    --bg: #FAFAFA;                /* Cloud White Background */
+    --card: #FFFFFF;              /* Crisp White for Contrast Cards */
+    --border: rgba(0, 70, 67, 0.1); /* Subtle Cyprus Green Border */
+    --primary: #004643;           /* Deep Cyprus Green Core */
+    --secondary: #002B29;         /* Darker Pine Green accent */
+    --accent: #E1AF93;            /* Added a warm, soft sand accent to balance the greens */
+    --text: #004643;              /* High-contrast text using Cyprus Green */
+    --muted: #5C817F;             /* Soft Sage for secondary text */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,26 +31,7 @@
     overflow-x: hidden;
   }
 
-  /* WASHI PAPER TEXTURE — fine grain overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.028;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 180px 180px;
-  }
-
-  /* JAPANESE INK ACCENT — thin brush stroke feel on section labels */
-  .section-label::before {
-    content: '— ';
-    opacity: 0.4;
-  }
-
-  h1, h2, h3, h4 { font-family: 'Shippori Mincho', 'Syne', serif; color: var(--primary); }
+  h1, h2, h3, h4 { font-family: 'Syne', sans-serif; color: var(--primary); }
   code, .mono { font-family: 'Space Mono', monospace; }
 
   /* CANVAS BACKGROUND */
@@ -72,8 +53,8 @@
     animation: orbFloat 12s ease-in-out infinite;
   }
   .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,70,67,0.08) 0%, transparent 70%); top: -100px; left: -100px; }
-  .orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(42,47,69,0.04) 0%, transparent 70%); top: 20%; right: -200px; animation-delay: -5s; }
-  .orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(201,168,130,0.1) 0%, transparent 70%); bottom: 10%; left: 30%; animation-delay: -8s; }
+  .orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,43,41,0.05) 0%, transparent 70%); top: 20%; right: -200px; animation-delay: -5s; }
+  .orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(225,175,147,0.1) 0%, transparent 70%); bottom: 10%; left: 30%; animation-delay: -8s; }
 
   @keyframes orbFloat {
     0%, 100% { transform: translateY(0) scale(1); }
@@ -89,7 +70,7 @@
     padding: 20px 0;
   }
   #navbar.scrolled {
-    background: rgba(243,237,226,0.92); /* Washi paper */
+    background: rgba(250,250,250,0.85); /* Blends with Cloud White */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
@@ -118,11 +99,11 @@
 
   /* GLASS CARDS */
   .glass-card {
-    background: rgba(250,245,238,0.82);
+    background: rgba(255,255,255,0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 16px;
   }
   .glass-card-hover {
     transition: all 0.35s ease;
@@ -136,13 +117,13 @@
   /* GLOW EFFECTS */
   .glow-primary { box-shadow: 0 0 30px rgba(0,70,67,0.1); }
   .glow-secondary { box-shadow: 0 0 30px rgba(0,43,41,0.1); }
-  .glow-accent { box-shadow: 0 0 30px rgba(201,168,130,0.15); }
+  .glow-accent { box-shadow: 0 0 30px rgba(225,175,147,0.15); }
   .text-glow { text-shadow: 0 0 30px rgba(0,70,67,0.15); }
 
   /* GRADIENT TEXT */
   .grad-primary { background: linear-gradient(135deg, #004643 0%, #002B29 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .grad-accent { background: linear-gradient(135deg, #B8963E 0%, #004643 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .grad-warm { background: linear-gradient(135deg, #004643 0%, #B8963E 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-accent { background: linear-gradient(135deg, #E1AF93 0%, #004643 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-warm { background: linear-gradient(135deg, #004643 0%, #E1AF93 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
   /* SECTION LABEL */
   .section-label {
@@ -157,7 +138,7 @@
   /* DIVIDER */
   .divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0,70,67,0.15) 20%, rgba(184,150,62,0.12) 50%, rgba(0,70,67,0.15) 80%, transparent);
+    background: linear-gradient(90deg, transparent, rgba(0,70,67,0.2), transparent);
   }
 
   /* ANIMATED COUNTER */
@@ -195,7 +176,7 @@
     inset: 0;
     border-radius: 16px;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(0,70,67,0.3), rgba(184,150,62,0.25));
+    background: linear-gradient(135deg, rgba(0,70,67,0.3), rgba(225,175,147,0.3));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -211,7 +192,7 @@
     font-size: 0.8rem;
     letter-spacing: 0.1em;
     padding: 14px 32px;
-    border-radius: 3px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
@@ -283,33 +264,21 @@
   .param-block {
     background: rgba(0,70,67,0.03);
     border: 1px solid rgba(0,70,67,0.1);
-    border-radius: 4px;
+    border-radius: 12px;
     padding: 20px;
     text-align: center;
     transition: all 0.3s;
-    position: relative;
   }
-  .param-block::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    opacity: 0;
-    transition: opacity 0.3s;
-    border-radius: 0 0 4px 4px;
-  }
-  .param-block:hover::after { opacity: 0.5; }
   .param-block:hover {
-    background: rgba(0,70,67,0.05);
-    box-shadow: 0 8px 24px rgba(0,70,67,0.06);
+    background: rgba(0,70,67,0.06);
+    box-shadow: 0 10px 30px rgba(0,70,67,0.05);
     transform: translateY(-2px);
   }
   .param-symbol {
     font-family: 'Syne', sans-serif;
     font-size: 2.5rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #004643, #C9A882);
+    background: linear-gradient(135deg, #004643, #E1AF93);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -454,7 +423,7 @@
     top: 0; left: 0; right: 0;
     height: 2px;
   }
-  .regime-easy::before { background: linear-gradient(90deg, #C9A882, transparent); }
+  .regime-easy::before { background: linear-gradient(90deg, #E1AF93, transparent); }
   .regime-medium::before { background: linear-gradient(90deg, var(--primary), transparent); }
   .regime-hard::before { background: linear-gradient(90deg, var(--secondary), transparent); }
 
@@ -475,7 +444,7 @@
   .author-avatar {
     width: 80px; height: 80px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(0,70,67,0.05), rgba(201,168,130,0.1));
+    background: linear-gradient(135deg, rgba(0,70,67,0.05), rgba(225,175,147,0.1));
     border: 2px solid rgba(0,70,67,0.15);
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 16px;
@@ -531,7 +500,7 @@
   .stat-block:nth-child(1)::before { background: linear-gradient(90deg, var(--primary), transparent); }
   .stat-block:nth-child(2)::before { background: linear-gradient(90deg, var(--muted), transparent); }
   .stat-block:nth-child(3)::before { background: linear-gradient(90deg, var(--secondary), transparent); }
-  .stat-block:nth-child(4)::before { background: linear-gradient(90deg, #C9A882, transparent); }
+  .stat-block:nth-child(4)::before { background: linear-gradient(90deg, #E1AF93, transparent); }
   .stat-block:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 60px rgba(0,0,0,0.04);
@@ -567,11 +536,11 @@
       <a href="#authors" class="nav-link">Authors</a>
     </div>
     <div class=" ml-4 flex items-center gap-3">
-      <a href=" https://www.kaggle.com/datasets/sifeddineaddar/synthetic-benchmark-brca" id="link-kaggle" class="btn-primary" style="padding:8px 16px;font-size:0.7rem;border-color:rgba(92,122,90,0.4);color:#5C7A5A;background:rgba(92,122,90,0.06);" title="Kaggle Dataset — link coming soon">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:-2px;margin-right:5px"><path d="M18.5 18.5L12 12m0 0L5.5 5.5M12 12l6.5-6.5M12 12l-6.5 6.5" stroke="#5C7A5A" stroke-width="2" stroke-linecap="round"/><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" stroke="#5C7A5A" stroke-width="1.5"/></svg>Kaggle
+      <a href=" https://www.kaggle.com/datasets/sifeddineaddar/synthetic-benchmark-brca" id="link-kaggle" class="btn-primary" style="padding:8px 16px;font-size:0.7rem;border-color:rgba(0,255,163,0.4);color:#00FFA3;background:rgba(0,255,163,0.06);" title="Kaggle Dataset — link coming soon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:-2px;margin-right:5px"><path d="M18.5 18.5L12 12m0 0L5.5 5.5M12 12l6.5-6.5M12 12l-6.5 6.5" stroke="#00FFA3" stroke-width="2" stroke-linecap="round"/><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" stroke="#00FFA3" stroke-width="1.5"/></svg>Kaggle
       </a>
       <a href="https://github.com/sifupy/quantum-bioinformatics-breast-cancer" id="link-github" class="btn-primary" style="padding:8px 16px;font-size:0.7rem;" title="GitHub Repository — link coming soon">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:-2px;margin-right:5px"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="#6B9E94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>GitHub
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:-2px;margin-right:5px"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>GitHub
       </a>
       <div class="metric-badge">Master's Thesis</div>
     </div>
@@ -585,9 +554,9 @@
     <div class="flex items-center justify-center gap-3 mb-8 floating-badge">
       <div class="metric-badge">Data Science & NLP</div>
       <div class="w-1 h-1 rounded-full bg-primary opacity-50"></div>
-      <div class="metric-badge" style="border-color:rgba(92,122,90,0.3);background:rgba(92,122,90,0.08);color:#5C7A5A">TCGA-BRCA</div>
+      <div class="metric-badge" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">TCGA-BRCA</div>
       <div class="w-1 h-1 rounded-full bg-primary opacity-50"></div>
-      <div class="metric-badge" style="border-color:rgba(42,47,69,0.3);background:rgba(42,47,69,0.08);color:#7A8AAA">QAOA</div>
+      <div class="metric-badge" style="border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.08);color:#a78bfa">QAOA</div>
     </div>
 
     <h1 class="hero-title hero-title-size font-extrabold leading-tight mb-6" style="font-size:3.2rem;font-family:'Syne',sans-serif;">
@@ -622,27 +591,27 @@
 
     <div class="hero-btn flex items-center justify-center gap-4 flex-wrap">
       <a href="#overview" class="btn-primary">Explore Research ↓</a>
-      <a href="#results" class="btn-primary" style="border-color:rgba(92,122,90,0.4);color:#5C7A5A;background:rgba(92,122,90,0.06)">View Results →</a>
-      <a href="#" id="hero-kaggle" class="btn-primary" style="border-color:rgba(110,143,160,0.4);color:#6E8FA0;background:rgba(110,143,160,0.06)" title="Kaggle Dataset — coming soon">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:-2px;margin-right:6px"><path d="M18.5 18.5L12 12m0 0L5.5 5.5M12 12l6.5-6.5M12 12l-6.5 6.5" stroke="#6E8FA0" stroke-width="2" stroke-linecap="round"/><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" stroke="#6E8FA0" stroke-width="1.5"/></svg>Dataset
+      <a href="#results" class="btn-primary" style="border-color:rgba(0,255,163,0.4);color:#00FFA3;background:rgba(0,255,163,0.06)">View Results →</a>
+      <a href="#" id="hero-kaggle" class="btn-primary" style="border-color:rgba(96,165,250,0.4);color:#60A5FA;background:rgba(96,165,250,0.06)" title="Kaggle Dataset — coming soon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:-2px;margin-right:6px"><path d="M18.5 18.5L12 12m0 0L5.5 5.5M12 12l6.5-6.5M12 12l-6.5 6.5" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" stroke="#60A5FA" stroke-width="1.5"/></svg>Dataset
       </a>
-      <a href="#" id="hero-github" class="btn-primary" style="border-color:rgba(148,163,184,0.3);color:#8A9BAA;background:rgba(148,163,184,0.05)" title="GitHub Repository — coming soon">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:-2px;margin-right:6px"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="#8A9BAA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Code
+      <a href="#" id="hero-github" class="btn-primary" style="border-color:rgba(148,163,184,0.3);color:#94A3B8;background:rgba(148,163,184,0.05)" title="GitHub Repository — coming soon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:-2px;margin-right:6px"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Code
       </a>
     </div>
 
     <!-- HERO STATS BAR -->
     <div class="mt-20 grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
       <div class="glass-card p-4 text-center">
-        <div class="text-2xl font-bold grad-primary" style="font-family:'Shippori Mincho','Syne',serif;">923</div>
+        <div class="text-2xl font-bold grad-primary" style="font-family:'Syne',sans-serif;">923</div>
         <div class="text-xs text-muted mt-1 mono tracking-wide">PATIENTS</div>
       </div>
       <div class="glass-card p-4 text-center">
-        <div class="text-2xl font-bold grad-accent" style="font-family:'Shippori Mincho','Syne',serif;">16,519</div>
+        <div class="text-2xl font-bold grad-accent" style="font-family:'Syne',sans-serif;">16,519</div>
         <div class="text-xs text-muted mt-1 mono tracking-wide">GENES</div>
       </div>
       <div class="glass-card p-4 text-center">
-        <div class="text-2xl font-bold grad-warm" style="font-family:'Shippori Mincho','Syne',serif;">10</div>
+        <div class="text-2xl font-bold grad-warm" style="font-family:'Syne',sans-serif;">10</div>
         <div class="text-xs text-muted mt-1 mono tracking-wide">QUANTUM CANDIDATES</div>
       </div>
       <div class="glass-card p-4 text-center">
@@ -650,7 +619,7 @@
         <div class="text-xs text-muted mt-1 mono tracking-wide">BENCH REGIMES</div>
       </div>
       <div class="glass-card p-4 text-center">
-        <div class="text-2xl font-bold" style="font-family:'Syne',sans-serif;color:#7A8AAA;">24</div>
+        <div class="text-2xl font-bold" style="font-family:'Syne',sans-serif;color:#a78bfa;">24</div>
         <div class="text-xs text-muted mt-1 mono tracking-wide">DATASETS</div>
       </div>
     </div>
@@ -675,7 +644,7 @@
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">01 / Project Overview</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">The Research Challenge</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">The Research Challenge</h2>
       <p class="text-muted max-w-2xl mx-auto leading-relaxed">
         Breast cancer genomics faces a critical dimensionality problem — discovering meaningful biomarkers from an ocean of genetic noise.
       </p>
@@ -686,57 +655,57 @@
       <div class="glass-card glass-card-hover grad-border p-6 fade-up" style="transition-delay:0.05s">
         <div class="mb-5">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(107,158,148,0.1)" stroke="rgba(107,158,148,0.3)" stroke-width="1"/>
-            <path d="M12 20h6M22 20h6M20 12v6M20 22v6" stroke="#6B9E94" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="20" cy="20" r="3" fill="#6B9E94" opacity="0.6"/>
+            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(0,229,255,0.1)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
+            <path d="M12 20h6M22 20h6M20 12v6M20 22v6" stroke="#00E5FF" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="20" cy="20" r="3" fill="#00E5FF" opacity="0.6"/>
           </svg>
         </div>
         <div class="mono text-xs tracking-widest text-primary opacity-60 mb-2">PROBLEM</div>
-        <h3 class="text-lg font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">High Dimensionality</h3>
+        <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif;">High Dimensionality</h3>
         <p class="text-muted text-sm leading-relaxed">Genomic datasets contain tens of thousands of features — far exceeding the number of patient samples available.</p>
       </div>
 
       <!-- Card 2 -->
-      <div class="glass-card glass-card-hover p-6 fade-up" style="transition-delay:0.1s;border-color:rgba(42,47,69,0.15)">
+      <div class="glass-card glass-card-hover p-6 fade-up" style="transition-delay:0.1s;border-color:rgba(124,58,237,0.15)">
         <div class="mb-5">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(42,47,69,0.1)" stroke="rgba(42,47,69,0.3)" stroke-width="1"/>
-            <path d="M12 28L20 12L28 28" stroke="#2A2F45" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M14 24h12" stroke="#2A2F45" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.3)" stroke-width="1"/>
+            <path d="M12 28L20 12L28 28" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 24h12" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="mono text-xs tracking-widest mb-2" style="color:var(--secondary);opacity:0.7">CHALLENGE</div>
-        <h3 class="text-lg font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">p ≫ n Problem</h3>
+        <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif;">p ≫ n Problem</h3>
         <p class="text-muted text-sm leading-relaxed">16,519 genes for only 923 patients creates severe overfitting risk — classical methods struggle here.</p>
       </div>
 
       <!-- Card 3 -->
-      <div class="glass-card glass-card-hover p-6 fade-up" style="transition-delay:0.15s;border-color:rgba(92,122,90,0.15)">
+      <div class="glass-card glass-card-hover p-6 fade-up" style="transition-delay:0.15s;border-color:rgba(0,255,163,0.15)">
         <div class="mb-5">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(92,122,90,0.1)" stroke="rgba(92,122,90,0.3)" stroke-width="1"/>
-            <circle cx="20" cy="20" r="8" stroke="#5C7A5A" stroke-width="1.5" stroke-dasharray="3 2"/>
-            <circle cx="20" cy="20" r="3" fill="#5C7A5A"/>
+            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+            <circle cx="20" cy="20" r="8" stroke="#00FFA3" stroke-width="1.5" stroke-dasharray="3 2"/>
+            <circle cx="20" cy="20" r="3" fill="#00FFA3"/>
           </svg>
         </div>
         <div class="mono text-xs tracking-widest mb-2" style="color:var(--accent);opacity:0.7">GOAL</div>
-        <h3 class="text-lg font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Clinical Biomarkers</h3>
+        <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif;">Clinical Biomarkers</h3>
         <p class="text-muted text-sm leading-relaxed">Identify a compact, clinically relevant set of genes that reliably distinguishes cancer from normal tissue.</p>
       </div>
 
       <!-- Card 4 -->
-      <div class="glass-card glass-card-hover p-6 fade-up" style="transition-delay:0.2s" style="border-color:rgba(107,158,148,0.2)">
+      <div class="glass-card glass-card-hover p-6 fade-up" style="transition-delay:0.2s" style="border-color:rgba(0,229,255,0.2)">
         <div class="mb-5">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(107,158,148,0.08)" stroke="rgba(107,158,148,0.25)" stroke-width="1"/>
-            <path d="M10 20 Q15 10 20 20 Q25 30 30 20" stroke="#6B9E94" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <circle cx="10" cy="20" r="2" fill="#6B9E94"/>
-            <circle cx="20" cy="20" r="2" fill="#2A2F45"/>
-            <circle cx="30" cy="20" r="2" fill="#5C7A5A"/>
+            <rect x="4" y="4" width="32" height="32" rx="8" fill="rgba(0,229,255,0.08)" stroke="rgba(0,229,255,0.25)" stroke-width="1"/>
+            <path d="M10 20 Q15 10 20 20 Q25 30 30 20" stroke="#00E5FF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <circle cx="10" cy="20" r="2" fill="#00E5FF"/>
+            <circle cx="20" cy="20" r="2" fill="#7C3AED"/>
+            <circle cx="30" cy="20" r="2" fill="#00FFA3"/>
           </svg>
         </div>
         <div class="mono text-xs tracking-widest text-primary opacity-60 mb-2">INNOVATION</div>
-        <h3 class="text-lg font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">QAOA Optimization</h3>
+        <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif;">QAOA Optimization</h3>
         <p class="text-muted text-sm leading-relaxed">Quantum Approximate Optimization Algorithm formulates biomarker selection as a combinatorial QUBO problem.</p>
       </div>
     </div>
@@ -744,11 +713,11 @@
 </section>
 
 <!-- ========== RESEARCH PIPELINE ========== -->
-<section id="pipeline" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,70,67,0.02),transparent)">
+<section id="pipeline" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,229,255,0.02),transparent)">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">02 / Research Pipeline</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">End-to-End Methodology</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">End-to-End Methodology</h2>
       <p class="text-muted max-w-xl mx-auto">From raw genomic data to interpretable biomarker candidates — a hybrid quantum-classical workflow.</p>
     </div>
 
@@ -757,9 +726,9 @@
       <div class="flex flex-wrap items-stretch justify-center gap-3 md:gap-2">
         
         <div class="pipeline-step min-w-0">
-          <div class="glass-card p-4 text-center h-full" style="min-width:110px;border-color:rgba(107,158,148,0.2)">
+          <div class="glass-card p-4 text-center h-full" style="min-width:110px;border-color:rgba(0,229,255,0.2)">
             <div class="mono text-xs text-primary opacity-60 mb-2">01</div>
-            <div class="text-sm font-bold mb-1" style="font-family:'Shippori Mincho','Syne',serif;">MAF Files</div>
+            <div class="text-sm font-bold mb-1" style="font-family:'Syne',sans-serif;">MAF Files</div>
             <div class="text-xs text-muted">Raw mutation data</div>
             <div class="highlight-bar" style="background:linear-gradient(90deg,var(--primary),transparent);width:100%"></div>
           </div>
@@ -768,7 +737,7 @@
         <div class="pipeline-step min-w-0">
           <div class="glass-card p-4 text-center h-full" style="min-width:120px">
             <div class="mono text-xs text-primary opacity-60 mb-2">02</div>
-            <div class="text-sm font-bold mb-1" style="font-family:'Shippori Mincho','Syne',serif;">Mutation Matrix</div>
+            <div class="text-sm font-bold mb-1" style="font-family:'Syne',sans-serif;">Mutation Matrix</div>
             <div class="text-xs text-muted">Binary encoding</div>
             <div class="highlight-bar" style="background:linear-gradient(90deg,var(--secondary),transparent);width:100%"></div>
           </div>
@@ -777,25 +746,25 @@
         <div class="pipeline-step min-w-0">
           <div class="glass-card p-4 text-center h-full" style="min-width:120px">
             <div class="mono text-xs text-primary opacity-60 mb-2">03</div>
-            <div class="text-sm font-bold mb-1" style="font-family:'Shippori Mincho','Syne',serif;">Rare Filter</div>
+            <div class="text-sm font-bold mb-1" style="font-family:'Syne',sans-serif;">Rare Filter</div>
             <div class="text-xs text-muted">Mutation pruning</div>
-            <div class="highlight-bar" style="background:linear-gradient(90deg,#2A2F45,transparent);width:100%"></div>
+            <div class="highlight-bar" style="background:linear-gradient(90deg,#7C3AED,transparent);width:100%"></div>
           </div>
         </div>
 
         <div class="pipeline-step min-w-0">
           <div class="glass-card p-4 text-center h-full" style="min-width:110px">
             <div class="mono text-xs text-primary opacity-60 mb-2">04</div>
-            <div class="text-sm font-bold mb-1" style="font-family:'Shippori Mincho','Syne',serif;">MI Ranking</div>
+            <div class="text-sm font-bold mb-1" style="font-family:'Syne',sans-serif;">MI Ranking</div>
             <div class="text-xs text-muted">Mutual information</div>
             <div class="highlight-bar" style="background:linear-gradient(90deg,var(--accent),transparent);width:100%"></div>
           </div>
         </div>
 
         <div class="pipeline-step min-w-0">
-          <div class="glass-card p-4 text-center h-full glow-primary" style="min-width:110px;border-color:rgba(107,158,148,0.35);background:rgba(107,158,148,0.05)">
+          <div class="glass-card p-4 text-center h-full glow-primary" style="min-width:110px;border-color:rgba(0,229,255,0.35);background:rgba(0,229,255,0.05)">
             <div class="mono text-xs text-primary opacity-60 mb-2">05</div>
-            <div class="text-sm font-bold mb-1 grad-primary" style="font-family:'Shippori Mincho','Syne',serif;">QAOA</div>
+            <div class="text-sm font-bold mb-1 grad-primary" style="font-family:'Syne',sans-serif;">QAOA</div>
             <div class="text-xs text-muted">Quantum selection</div>
             <div class="highlight-bar" style="background:linear-gradient(90deg,var(--primary),var(--secondary));width:100%"></div>
           </div>
@@ -804,16 +773,16 @@
         <div class="pipeline-step min-w-0">
           <div class="glass-card p-4 text-center h-full" style="min-width:120px">
             <div class="mono text-xs text-primary opacity-60 mb-2">06</div>
-            <div class="text-sm font-bold mb-1" style="font-family:'Shippori Mincho','Syne',serif;">Classification</div>
+            <div class="text-sm font-bold mb-1" style="font-family:'Syne',sans-serif;">Classification</div>
             <div class="text-xs text-muted">Logistic Regression</div>
-            <div class="highlight-bar" style="background:linear-gradient(90deg,#8A6070,transparent);width:100%"></div>
+            <div class="highlight-bar" style="background:linear-gradient(90deg,#EC4899,transparent);width:100%"></div>
           </div>
         </div>
 
         <div class="pipeline-step min-w-0">
-          <div class="glass-card p-4 text-center h-full" style="min-width:110px;border-color:rgba(92,122,90,0.2)">
+          <div class="glass-card p-4 text-center h-full" style="min-width:110px;border-color:rgba(0,255,163,0.2)">
             <div class="mono text-xs" style="color:var(--accent);opacity:0.6" class="mb-2">07</div>
-            <div class="text-sm font-bold mb-1 grad-accent" style="font-family:'Shippori Mincho','Syne',serif;">Evaluation</div>
+            <div class="text-sm font-bold mb-1 grad-accent" style="font-family:'Syne',sans-serif;">Evaluation</div>
             <div class="text-xs text-muted">AUC · F1 · ROC</div>
             <div class="highlight-bar" style="background:linear-gradient(90deg,var(--accent),transparent);width:100%"></div>
           </div>
@@ -823,19 +792,19 @@
 
     <!-- FP-GROWTH BRANCH -->
     <div class="fade-up max-w-2xl mx-auto">
-      <div class="glass-card p-5" style="border-color:rgba(42,47,69,0.2)">
+      <div class="glass-card p-5" style="border-color:rgba(124,58,237,0.2)">
         <div class="flex items-center gap-3 mb-4">
           <div class="mono text-xs" style="color:var(--secondary)">ALTERNATIVE BRANCH</div>
-          <div class="flex-1 h-px" style="background:rgba(42,47,69,0.2)"></div>
+          <div class="flex-1 h-px" style="background:rgba(124,58,237,0.2)"></div>
         </div>
         <div class="flex flex-wrap gap-3 items-center">
-          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(42,47,69,0.1);border:1px solid rgba(42,47,69,0.2);color:#7A8AAA;font-family:'Space Mono',monospace;">Mutation Matrix</div>
+          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);color:#a78bfa;font-family:'Space Mono',monospace;">Mutation Matrix</div>
           <div style="color:var(--secondary);opacity:0.5">→</div>
-          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(42,47,69,0.1);border:1px solid rgba(42,47,69,0.2);color:#7A8AAA;font-family:'Space Mono',monospace;">FP-Growth Mining</div>
+          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);color:#a78bfa;font-family:'Space Mono',monospace;">FP-Growth Mining</div>
           <div style="color:var(--secondary);opacity:0.5">→</div>
-          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(42,47,69,0.1);border:1px solid rgba(42,47,69,0.2);color:#7A8AAA;font-family:'Space Mono',monospace;">Pattern Features</div>
+          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);color:#a78bfa;font-family:'Space Mono',monospace;">Pattern Features</div>
           <div style="color:var(--secondary);opacity:0.5">→</div>
-          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(42,47,69,0.1);border:1px solid rgba(42,47,69,0.2);color:#7A8AAA;font-family:'Space Mono',monospace;">Logistic Regression</div>
+          <div class="text-xs px-3 py-2 rounded-lg" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);color:#a78bfa;font-family:'Space Mono',monospace;">Logistic Regression</div>
         </div>
       </div>
     </div>
@@ -847,7 +816,7 @@
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">03 / Dataset</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">TCGA-BRCA Cohort</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">TCGA-BRCA Cohort</h2>
       <p class="text-muted max-w-xl mx-auto">The Cancer Genome Atlas Breast Invasive Carcinoma dataset — the gold standard for breast cancer genomics research.</p>
     </div>
 
@@ -881,9 +850,9 @@
           <div class="text-sm text-muted">Mutation Annotation Format (MAF) — somatic mutations across all sequenced samples</div>
         </div>
         <div class="flex items-center gap-3">
-          <div class="text-xs px-3 py-1 rounded-full mono" style="background:rgba(92,122,90,0.08);border:1px solid rgba(92,122,90,0.2);color:#5C7A5A">Binary Matrix</div>
-          <div class="text-xs px-3 py-1 rounded-full mono" style="background:rgba(107,158,148,0.08);border:1px solid rgba(107,158,148,0.2);color:var(--primary)">Somatic SNVs</div>
-          <div class="text-xs px-3 py-1 rounded-full mono" style="background:rgba(42,47,69,0.08);border:1px solid rgba(42,47,69,0.2);color:#7A8AAA">Open Access</div>
+          <div class="text-xs px-3 py-1 rounded-full mono" style="background:rgba(0,255,163,0.08);border:1px solid rgba(0,255,163,0.2);color:#00FFA3">Binary Matrix</div>
+          <div class="text-xs px-3 py-1 rounded-full mono" style="background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);color:var(--primary)">Somatic SNVs</div>
+          <div class="text-xs px-3 py-1 rounded-full mono" style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.2);color:#a78bfa">Open Access</div>
         </div>
       </div>
     </div>
@@ -891,11 +860,11 @@
 </section>
 
 <!-- ========== METHODS COMPARISON ========== -->
-<section id="methods" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(42,47,69,0.015),transparent)">
+<section id="methods" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(124,58,237,0.02),transparent)">
   <div class="max-w-5xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">04 / Methods</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">Comparative Analysis</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Comparative Analysis</h2>
       <p class="text-muted max-w-xl mx-auto">Four biomarker selection strategies evaluated under identical conditions on TCGA-BRCA.</p>
     </div>
 
@@ -946,13 +915,13 @@
             <td class="text-center text-xs text-muted">QUBO formulation</td>
             <td class="text-center text-xs" style="color:var(--secondary)">10 quantum candidates</td>
             <td class="text-center">
-              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(42,47,69,0.1);border:1px solid rgba(42,47,69,0.2);color:#7A8AAA">QUANTUM</span>
+              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);color:#a78bfa">QUANTUM</span>
             </td>
           </tr>
           <tr>
             <td>
               <div class="flex items-center gap-3">
-                <div style="width:8px;height:8px;border-radius:2px;background:#6E8FA0"></div>
+                <div style="width:8px;height:8px;border-radius:2px;background:#60A5FA"></div>
                 <div>
                   <div class="font-bold">MI + LR</div>
                   <div class="text-xs text-muted">Mutual Information</div>
@@ -960,18 +929,18 @@
               </div>
             </td>
             <td class="text-center">
-              <div class="font-bold mono text-lg" style="color:#6E8FA0">—</div>
+              <div class="font-bold mono text-lg" style="color:#60A5FA">—</div>
             </td>
             <td class="text-center text-xs text-muted">Information-theoretic</td>
             <td class="text-center text-xs text-muted">Top-k ranking</td>
             <td class="text-center">
-              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(110,143,160,0.1);border:1px solid rgba(110,143,160,0.2);color:#6E8FA0">BASELINE</span>
+              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2);color:#60A5FA">BASELINE</span>
             </td>
           </tr>
           <tr>
             <td>
               <div class="flex items-center gap-3">
-                <div style="width:8px;height:8px;border-radius:2px;background:#A87C8A"></div>
+                <div style="width:8px;height:8px;border-radius:2px;background:#F472B6"></div>
                 <div>
                   <div class="font-bold">FP-Growth</div>
                   <div class="text-xs text-muted">Pattern Mining</div>
@@ -979,12 +948,12 @@
               </div>
             </td>
             <td class="text-center">
-              <div class="font-bold mono text-lg" style="color:#A87C8A">0.5370</div>
+              <div class="font-bold mono text-lg" style="color:#F472B6">0.5370</div>
             </td>
             <td class="text-center text-xs text-muted">Association rules</td>
             <td class="text-center text-xs text-muted">Frequent patterns</td>
             <td class="text-center">
-              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(168,124,138,0.1);border:1px solid rgba(168,124,138,0.2);color:#A87C8A">MINING</span>
+              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(244,114,182,0.1);border:1px solid rgba(244,114,182,0.2);color:#F472B6">MINING</span>
             </td>
           </tr>
         </tbody>
@@ -998,7 +967,7 @@
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">05 / Results Dashboard</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">Performance Metrics</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Performance Metrics</h2>
       <p class="text-muted max-w-xl mx-auto">Interactive visualization of model performance across all evaluated biomarker selection strategies.</p>
     </div>
 
@@ -1008,7 +977,7 @@
         <div class="flex items-center justify-between mb-6">
           <div>
             <div class="mono text-xs text-primary opacity-60 mb-1">AUC COMPARISON</div>
-            <div class="font-bold" style="font-family:'Shippori Mincho','Syne',serif;">Area Under ROC Curve</div>
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Area Under ROC Curve</div>
           </div>
           <div class="metric-badge">Higher is Better</div>
         </div>
@@ -1020,7 +989,7 @@
         <div class="flex items-center justify-between mb-6">
           <div>
             <div class="mono text-xs text-primary opacity-60 mb-1">ROC CURVES</div>
-            <div class="font-bold" style="font-family:'Shippori Mincho','Syne',serif;">Receiver Operating Characteristic</div>
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Receiver Operating Characteristic</div>
           </div>
           <div class="metric-badge">Publication Quality</div>
         </div>
@@ -1031,11 +1000,11 @@
 </section>
 
 <!-- ========== QUANTUM OPTIMIZATION ========== -->
-<section id="quantum" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,70,67,0.03),transparent)">
+<section id="quantum" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,229,255,0.03),transparent)">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">06 / Quantum Optimization</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">QAOA Formulation</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">QAOA Formulation</h2>
       <p class="text-muted max-w-2xl mx-auto">The Quantum Approximate Optimization Algorithm encodes biomarker selection as a Quadratic Unconstrained Binary Optimization (QUBO) problem, exploiting quantum superposition to explore exponentially large solution spaces.</p>
     </div>
 
@@ -1044,24 +1013,24 @@
         <div class="param-symbol">α</div>
         <div class="mono text-xs text-primary opacity-60 mt-3 mb-2">FEATURE RELEVANCE</div>
         <div class="text-sm text-muted leading-relaxed">Reward for selecting genes with high mutual information relative to the cancer label</div>
-        <div class="mt-3 mono text-xs" style="color:rgba(107,158,148,0.5)">∑ᵢ αᵢ · I(Gᵢ ; Y) · xᵢ</div>
+        <div class="mt-3 mono text-xs" style="color:rgba(0,229,255,0.5)">∑ᵢ αᵢ · I(Gᵢ ; Y) · xᵢ</div>
       </div>
-      <div class="param-block" style="border-color:rgba(42,47,69,0.2);background:rgba(42,47,69,0.04)">
-        <div class="param-symbol" style="background:linear-gradient(135deg,#2A2F45,#8A6070);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">β</div>
+      <div class="param-block" style="border-color:rgba(124,58,237,0.2);background:rgba(124,58,237,0.04)">
+        <div class="param-symbol" style="background:linear-gradient(135deg,#7C3AED,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">β</div>
         <div class="mono text-xs mt-3 mb-2" style="color:var(--secondary);opacity:0.7">REDUNDANCY PENALTY</div>
         <div class="text-sm text-muted leading-relaxed">Penalize co-selection of highly correlated genes to maximize information diversity</div>
-        <div class="mt-3 mono text-xs" style="color:rgba(42,47,69,0.5)">− β · ∑ᵢ≠ⱼ C(Gᵢ,Gⱼ) · xᵢxⱼ</div>
+        <div class="mt-3 mono text-xs" style="color:rgba(124,58,237,0.5)">− β · ∑ᵢ≠ⱼ C(Gᵢ,Gⱼ) · xᵢxⱼ</div>
       </div>
-      <div class="param-block" style="border-color:rgba(92,122,90,0.2);background:rgba(92,122,90,0.04)">
-        <div class="param-symbol" style="background:linear-gradient(135deg,#5C7A5A,#6B9E94);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">γ</div>
+      <div class="param-block" style="border-color:rgba(0,255,163,0.2);background:rgba(0,255,163,0.04)">
+        <div class="param-symbol" style="background:linear-gradient(135deg,#00FFA3,#00E5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">γ</div>
         <div class="mono text-xs mt-3 mb-2" style="color:var(--accent);opacity:0.7">SPARSITY PENALTY</div>
         <div class="text-sm text-muted leading-relaxed">Enforce a compact feature subset — target selection of exactly k biomarker genes</div>
-        <div class="mt-3 mono text-xs" style="color:rgba(92,122,90,0.5)">− γ · (∑ᵢ xᵢ − k)²</div>
+        <div class="mt-3 mono text-xs" style="color:rgba(0,255,163,0.5)">− γ · (∑ᵢ xᵢ − k)²</div>
       </div>
     </div>
 
     <!-- QUBO FORMULA -->
-    <div class="glass-card p-6 mb-12 fade-up" style="border-color:rgba(107,158,148,0.15)">
+    <div class="glass-card p-6 mb-12 fade-up" style="border-color:rgba(0,229,255,0.15)">
       <div class="mono text-xs text-primary opacity-60 mb-4">QUBO OBJECTIVE FUNCTION</div>
       <div class="space-y-2">
         <div class="qubo-line">H(<strong>x</strong>) = <span>−α</span> · ∑ᵢ <em>MI(Gᵢ)</em> · xᵢ</div>
@@ -1108,98 +1077,98 @@
           </g>
 
           <!-- Layer 1 label -->
-          <text x="160" y="12" font-family="Space Mono" font-size="8" fill="rgba(107,158,148,0.4)" text-anchor="middle">COST LAYER 1</text>
-          <line x1="100" y1="15" x2="220" y2="15" stroke="rgba(107,158,148,0.2)" stroke-width="1"/>
+          <text x="160" y="12" font-family="Space Mono" font-size="8" fill="rgba(0,229,255,0.4)" text-anchor="middle">COST LAYER 1</text>
+          <line x1="100" y1="15" x2="220" y2="15" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
 
           <!-- Layer 1 RZ gates -->
-          <rect x="100" y="22" width="34" height="26" rx="4" fill="rgba(107,158,148,0.12)" stroke="rgba(107,158,148,0.4)" stroke-width="1"/>
+          <rect x="100" y="22" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
           <text x="117" y="39" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₁)</text>
-          <rect x="100" y="62" width="34" height="26" rx="4" fill="rgba(107,158,148,0.12)" stroke="rgba(107,158,148,0.4)" stroke-width="1"/>
+          <rect x="100" y="62" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
           <text x="117" y="79" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₁)</text>
-          <rect x="100" y="102" width="34" height="26" rx="4" fill="rgba(107,158,148,0.12)" stroke="rgba(107,158,148,0.4)" stroke-width="1"/>
+          <rect x="100" y="102" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
           <text x="117" y="119" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₁)</text>
-          <rect x="100" y="142" width="34" height="26" rx="4" fill="rgba(107,158,148,0.12)" stroke="rgba(107,158,148,0.4)" stroke-width="1"/>
+          <rect x="100" y="142" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
           <text x="117" y="159" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₁)</text>
-          <rect x="100" y="182" width="34" height="26" rx="4" fill="rgba(107,158,148,0.12)" stroke="rgba(107,158,148,0.4)" stroke-width="1"/>
+          <rect x="100" y="182" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
           <text x="117" y="199" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₁)</text>
 
           <!-- CNOT gates layer 1 -->
-          <circle cx="175" cy="35" r="5" fill="#6B9E94" opacity="0.8"/>
-          <line x1="175" y1="35" x2="175" y2="75" stroke="#6B9E94" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
-          <circle cx="175" cy="75" r="8" fill="none" stroke="#6B9E94" stroke-width="1.5" opacity="0.7"/>
-          <line x1="167" y1="75" x2="183" y2="75" stroke="#6B9E94" stroke-width="1.5" opacity="0.7"/>
-          <line x1="175" y1="67" x2="175" y2="83" stroke="#6B9E94" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="175" cy="35" r="5" fill="#00E5FF" opacity="0.8"/>
+          <line x1="175" y1="35" x2="175" y2="75" stroke="#00E5FF" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+          <circle cx="175" cy="75" r="8" fill="none" stroke="#00E5FF" stroke-width="1.5" opacity="0.7"/>
+          <line x1="167" y1="75" x2="183" y2="75" stroke="#00E5FF" stroke-width="1.5" opacity="0.7"/>
+          <line x1="175" y1="67" x2="175" y2="83" stroke="#00E5FF" stroke-width="1.5" opacity="0.7"/>
 
-          <circle cx="200" cy="115" r="5" fill="#2A2F45" opacity="0.8"/>
-          <line x1="200" y1="115" x2="200" y2="155" stroke="#2A2F45" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
-          <circle cx="200" cy="155" r="8" fill="none" stroke="#2A2F45" stroke-width="1.5" opacity="0.7"/>
-          <line x1="192" y1="155" x2="208" y2="155" stroke="#2A2F45" stroke-width="1.5" opacity="0.7"/>
-          <line x1="200" y1="147" x2="200" y2="163" stroke="#2A2F45" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="200" cy="115" r="5" fill="#7C3AED" opacity="0.8"/>
+          <line x1="200" y1="115" x2="200" y2="155" stroke="#7C3AED" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+          <circle cx="200" cy="155" r="8" fill="none" stroke="#7C3AED" stroke-width="1.5" opacity="0.7"/>
+          <line x1="192" y1="155" x2="208" y2="155" stroke="#7C3AED" stroke-width="1.5" opacity="0.7"/>
+          <line x1="200" y1="147" x2="200" y2="163" stroke="#7C3AED" stroke-width="1.5" opacity="0.7"/>
 
           <!-- Layer 1 MIXER label -->
-          <text x="300" y="12" font-family="Space Mono" font-size="8" fill="rgba(92,122,90,0.4)" text-anchor="middle">MIXER LAYER 1</text>
-          <line x1="240" y1="15" x2="360" y2="15" stroke="rgba(92,122,90,0.2)" stroke-width="1"/>
+          <text x="300" y="12" font-family="Space Mono" font-size="8" fill="rgba(0,255,163,0.4)" text-anchor="middle">MIXER LAYER 1</text>
+          <line x1="240" y1="15" x2="360" y2="15" stroke="rgba(0,255,163,0.2)" stroke-width="1"/>
 
           <!-- Rx gates layer 1 -->
-          <rect x="240" y="22" width="34" height="26" rx="4" fill="rgba(92,122,90,0.1)" stroke="rgba(92,122,90,0.3)" stroke-width="1"/>
-          <text x="257" y="39" font-family="Space Mono" font-size="9" fill="#5C7A5A" text-anchor="middle">Rx(β₁)</text>
-          <rect x="240" y="62" width="34" height="26" rx="4" fill="rgba(92,122,90,0.1)" stroke="rgba(92,122,90,0.3)" stroke-width="1"/>
-          <text x="257" y="79" font-family="Space Mono" font-size="9" fill="#5C7A5A" text-anchor="middle">Rx(β₁)</text>
-          <rect x="240" y="102" width="34" height="26" rx="4" fill="rgba(92,122,90,0.1)" stroke="rgba(92,122,90,0.3)" stroke-width="1"/>
-          <text x="257" y="119" font-family="Space Mono" font-size="9" fill="#5C7A5A" text-anchor="middle">Rx(β₁)</text>
-          <rect x="240" y="142" width="34" height="26" rx="4" fill="rgba(92,122,90,0.1)" stroke="rgba(92,122,90,0.3)" stroke-width="1"/>
-          <text x="257" y="159" font-family="Space Mono" font-size="9" fill="#5C7A5A" text-anchor="middle">Rx(β₁)</text>
-          <rect x="240" y="182" width="34" height="26" rx="4" fill="rgba(92,122,90,0.1)" stroke="rgba(92,122,90,0.3)" stroke-width="1"/>
-          <text x="257" y="199" font-family="Space Mono" font-size="9" fill="#5C7A5A" text-anchor="middle">Rx(β₁)</text>
+          <rect x="240" y="22" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="257" y="39" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₁)</text>
+          <rect x="240" y="62" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="257" y="79" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₁)</text>
+          <rect x="240" y="102" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="257" y="119" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₁)</text>
+          <rect x="240" y="142" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="257" y="159" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₁)</text>
+          <rect x="240" y="182" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="257" y="199" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₁)</text>
 
           <!-- Layer 2 -->
-          <text x="440" y="12" font-family="Space Mono" font-size="8" fill="rgba(107,158,148,0.4)" text-anchor="middle">COST LAYER 2</text>
-          <line x1="380" y1="15" x2="500" y2="15" stroke="rgba(107,158,148,0.2)" stroke-width="1"/>
+          <text x="440" y="12" font-family="Space Mono" font-size="8" fill="rgba(0,229,255,0.4)" text-anchor="middle">COST LAYER 2</text>
+          <line x1="380" y1="15" x2="500" y2="15" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
 
-          <rect x="380" y="22" width="34" height="26" rx="4" fill="rgba(107,158,148,0.12)" stroke="rgba(107,158,148,0.4)" stroke-width="1"/>
+          <rect x="380" y="22" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
           <text x="397" y="39" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₂)</text>
-          <rect x="380" y="62" width="34" height="26" rx="4" fill="rgba(107,158,148,0.12)" stroke="rgba(107,158,148,0.4)" stroke-width="1"/>
+          <rect x="380" y="62" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
           <text x="397" y="79" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₂)</text>
-          <rect x="380" y="102" width="34" height="26" rx="4" fill="rgba(107,158,148,0.12)" stroke="rgba(107,158,148,0.4)" stroke-width="1"/>
+          <rect x="380" y="102" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
           <text x="397" y="119" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₂)</text>
-          <rect x="380" y="142" width="34" height="26" rx="4" fill="rgba(107,158,148,0.12)" stroke="rgba(107,158,148,0.4)" stroke-width="1"/>
+          <rect x="380" y="142" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
           <text x="397" y="159" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₂)</text>
-          <rect x="380" y="182" width="34" height="26" rx="4" fill="rgba(107,158,148,0.12)" stroke="rgba(107,158,148,0.4)" stroke-width="1"/>
+          <rect x="380" y="182" width="34" height="26" rx="4" fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
           <text x="397" y="199" class="circuit-text" text-anchor="middle" font-size="9">Rz(γ₂)</text>
 
           <!-- Mixer layer 2 -->
-          <text x="575" y="12" font-family="Space Mono" font-size="8" fill="rgba(92,122,90,0.4)" text-anchor="middle">MIXER LAYER 2 + MEASURE</text>
-          <line x1="505" y1="15" x2="655" y2="15" stroke="rgba(92,122,90,0.2)" stroke-width="1"/>
+          <text x="575" y="12" font-family="Space Mono" font-size="8" fill="rgba(0,255,163,0.4)" text-anchor="middle">MIXER LAYER 2 + MEASURE</text>
+          <line x1="505" y1="15" x2="655" y2="15" stroke="rgba(0,255,163,0.2)" stroke-width="1"/>
 
-          <rect x="510" y="22" width="34" height="26" rx="4" fill="rgba(92,122,90,0.1)" stroke="rgba(92,122,90,0.3)" stroke-width="1"/>
-          <text x="527" y="39" font-family="Space Mono" font-size="9" fill="#5C7A5A" text-anchor="middle">Rx(β₂)</text>
-          <rect x="510" y="62" width="34" height="26" rx="4" fill="rgba(92,122,90,0.1)" stroke="rgba(92,122,90,0.3)" stroke-width="1"/>
-          <text x="527" y="79" font-family="Space Mono" font-size="9" fill="#5C7A5A" text-anchor="middle">Rx(β₂)</text>
-          <rect x="510" y="102" width="34" height="26" rx="4" fill="rgba(92,122,90,0.1)" stroke="rgba(92,122,90,0.3)" stroke-width="1"/>
-          <text x="527" y="119" font-family="Space Mono" font-size="9" fill="#5C7A5A" text-anchor="middle">Rx(β₂)</text>
-          <rect x="510" y="142" width="34" height="26" rx="4" fill="rgba(92,122,90,0.1)" stroke="rgba(92,122,90,0.3)" stroke-width="1"/>
-          <text x="527" y="159" font-family="Space Mono" font-size="9" fill="#5C7A5A" text-anchor="middle">Rx(β₂)</text>
-          <rect x="510" y="182" width="34" height="26" rx="4" fill="rgba(92,122,90,0.1)" stroke="rgba(92,122,90,0.3)" stroke-width="1"/>
-          <text x="527" y="199" font-family="Space Mono" font-size="9" fill="#5C7A5A" text-anchor="middle">Rx(β₂)</text>
+          <rect x="510" y="22" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="527" y="39" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₂)</text>
+          <rect x="510" y="62" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="527" y="79" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₂)</text>
+          <rect x="510" y="102" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="527" y="119" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₂)</text>
+          <rect x="510" y="142" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="527" y="159" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₂)</text>
+          <rect x="510" y="182" width="34" height="26" rx="4" fill="rgba(0,255,163,0.1)" stroke="rgba(0,255,163,0.3)" stroke-width="1"/>
+          <text x="527" y="199" font-family="Space Mono" font-size="9" fill="#00FFA3" text-anchor="middle">Rx(β₂)</text>
 
           <!-- Measure gates -->
-          <rect x="560" y="22" width="28" height="26" rx="4" fill="rgba(0,70,67,0.04)" stroke="rgba(0,70,67,0.25)" stroke-width="1"/>
-          <text x="574" y="37" font-family="Space Mono" font-size="9" fill="rgba(0,40,38,0.55)" text-anchor="middle">M</text>
-          <rect x="560" y="62" width="28" height="26" rx="4" fill="rgba(0,70,67,0.04)" stroke="rgba(0,70,67,0.25)" stroke-width="1"/>
-          <text x="574" y="77" font-family="Space Mono" font-size="9" fill="rgba(0,40,38,0.55)" text-anchor="middle">M</text>
-          <rect x="560" y="102" width="28" height="26" rx="4" fill="rgba(0,70,67,0.04)" stroke="rgba(0,70,67,0.25)" stroke-width="1"/>
-          <text x="574" y="117" font-family="Space Mono" font-size="9" fill="rgba(0,40,38,0.55)" text-anchor="middle">M</text>
-          <rect x="560" y="142" width="28" height="26" rx="4" fill="rgba(0,70,67,0.04)" stroke="rgba(0,70,67,0.25)" stroke-width="1"/>
-          <text x="574" y="157" font-family="Space Mono" font-size="9" fill="rgba(0,40,38,0.55)" text-anchor="middle">M</text>
-          <rect x="560" y="182" width="28" height="26" rx="4" fill="rgba(0,70,67,0.04)" stroke="rgba(0,70,67,0.25)" stroke-width="1"/>
-          <text x="574" y="197" font-family="Space Mono" font-size="9" fill="rgba(0,40,38,0.55)" text-anchor="middle">M</text>
+          <rect x="560" y="22" width="28" height="26" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="574" y="37" font-family="Space Mono" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">M</text>
+          <rect x="560" y="62" width="28" height="26" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="574" y="77" font-family="Space Mono" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">M</text>
+          <rect x="560" y="102" width="28" height="26" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="574" y="117" font-family="Space Mono" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">M</text>
+          <rect x="560" y="142" width="28" height="26" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="574" y="157" font-family="Space Mono" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">M</text>
+          <rect x="560" y="182" width="28" height="26" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="574" y="197" font-family="Space Mono" font-size="9" fill="rgba(255,255,255,0.4)" text-anchor="middle">M</text>
 
           <!-- Classical output lines -->
-          <line x1="588" y1="35" x2="650" y2="35" stroke="rgba(0,70,67,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
-          <line x1="588" y1="75" x2="650" y2="75" stroke="rgba(0,70,67,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
-          <line x1="588" y1="115" x2="650" y2="115" stroke="rgba(0,70,67,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
-          <line x1="588" y1="155" x2="650" y2="155" stroke="rgba(0,70,67,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
-          <line x1="588" y1="195" x2="650" y2="195" stroke="rgba(0,70,67,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="588" y1="35" x2="650" y2="35" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="588" y1="75" x2="650" y2="75" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="588" y1="115" x2="650" y2="115" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="588" y1="155" x2="650" y2="155" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="588" y1="195" x2="650" y2="195" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
         </svg>
       </div>
     </div>
@@ -1211,7 +1180,7 @@
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">07 / Biomarker Discovery</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">Quantum-Selected Gene Candidates</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Quantum-Selected Gene Candidates</h2>
       <p class="text-muted max-w-xl mx-auto">QAOA identified 10 candidate biomarkers from 16,519 genes — a 99.9% reduction in the feature search space.</p>
     </div>
 
@@ -1226,13 +1195,13 @@
       <div class="gene-card">
         <div class="gene-name mb-2">KMT2C</div>
         <div class="text-xs text-muted mb-3 leading-relaxed">Histone H3K4 methyltransferase — epigenetic regulator frequently mutated in breast cancer.</div>
-        <div class="metric-badge" style="border-color:rgba(42,47,69,0.3);background:rgba(42,47,69,0.08);color:#7A8AAA">Epigenetic</div>
+        <div class="metric-badge" style="border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.08);color:#a78bfa">Epigenetic</div>
       </div>
 
       <div class="gene-card">
         <div class="gene-name mb-2">PIK3CA</div>
         <div class="text-xs text-muted mb-3 leading-relaxed">PI3K catalytic subunit — oncogene driving cell proliferation and survival signaling.</div>
-        <div class="metric-badge" style="border-color:rgba(92,122,90,0.3);background:rgba(92,122,90,0.08);color:#5C7A5A">Oncogene</div>
+        <div class="metric-badge" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">Oncogene</div>
       </div>
 
       <div class="gene-card">
@@ -1244,31 +1213,31 @@
       <div class="gene-card">
         <div class="gene-name mb-2">BRCA1</div>
         <div class="text-xs text-muted mb-3 leading-relaxed">DNA repair and genome stability. Germline mutations confer high hereditary breast cancer risk.</div>
-        <div class="metric-badge" style="border-color:rgba(138,96,112,0.3);background:rgba(138,96,112,0.08);color:#A87C8A">DNA Repair</div>
+        <div class="metric-badge" style="border-color:rgba(236,72,153,0.3);background:rgba(236,72,153,0.08);color:#F472B6">DNA Repair</div>
       </div>
 
       <div class="gene-card">
         <div class="gene-name mb-2">BRCA2</div>
         <div class="text-xs text-muted mb-3 leading-relaxed">Homologous recombination repair. Mutation carriers have ~70% lifetime breast cancer risk.</div>
-        <div class="metric-badge" style="border-color:rgba(138,96,112,0.3);background:rgba(138,96,112,0.08);color:#A87C8A">DNA Repair</div>
+        <div class="metric-badge" style="border-color:rgba(236,72,153,0.3);background:rgba(236,72,153,0.08);color:#F472B6">DNA Repair</div>
       </div>
 
       <div class="gene-card">
         <div class="gene-name mb-2">CDH1</div>
         <div class="text-xs text-muted mb-3 leading-relaxed">E-cadherin — cell adhesion molecule. Loss drives epithelial-mesenchymal transition and invasion.</div>
-        <div class="metric-badge" style="border-color:rgba(92,122,90,0.3);background:rgba(92,122,90,0.08);color:#5C7A5A">Adhesion</div>
+        <div class="metric-badge" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">Adhesion</div>
       </div>
 
       <div class="gene-card">
         <div class="gene-name mb-2">MAP3K1</div>
         <div class="text-xs text-muted mb-3 leading-relaxed">MAPK pathway kinase — regulates cell stress response and is a recurrent mutation in luminal BRCA.</div>
-        <div class="metric-badge" style="border-color:rgba(42,47,69,0.3);background:rgba(42,47,69,0.08);color:#7A8AAA">Signaling</div>
+        <div class="metric-badge" style="border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.08);color:#a78bfa">Signaling</div>
       </div>
 
       <div class="gene-card">
         <div class="gene-name mb-2">AKT1</div>
         <div class="text-xs text-muted mb-3 leading-relaxed">Serine/threonine kinase — central hub of PI3K/AKT/mTOR survival pathway in breast cancer.</div>
-        <div class="metric-badge" style="border-color:rgba(92,122,90,0.3);background:rgba(92,122,90,0.08);color:#5C7A5A">Kinase</div>
+        <div class="metric-badge" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">Kinase</div>
       </div>
 
       <div class="gene-card">
@@ -1281,28 +1250,28 @@
 </section>
 
 <!-- ========== BENCHMARK VALIDATION ========== -->
-<section id="benchmark" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(42,47,69,0.02),transparent)">
+<section id="benchmark" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(124,58,237,0.03),transparent)">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">08 / Benchmark Validation</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">Synthetic Benchmark Framework</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Synthetic Benchmark Framework</h2>
       <p class="text-muted max-w-2xl mx-auto">An 8-regime synthetic benchmark spanning noise, sparsity, class imbalance, signal strength, dimensionality, tumour heterogeneity, and adversarial correlated structure — 24 datasets across 3 independent seeds, enabling exact ground-truth evaluation impossible with real clinical data.</p>
     </div>
 
     <!-- BENCHMARK OVERVIEW STATS -->
     <div class="grid grid-cols-3 gap-5 mb-12 fade-up">
-      <div class="glass-card p-6 text-center" style="border-color:rgba(107,158,148,0.2)">
-        <div class="text-4xl font-bold grad-primary mb-2" style="font-family:'Shippori Mincho','Syne',serif;">24</div>
+      <div class="glass-card p-6 text-center" style="border-color:rgba(0,229,255,0.2)">
+        <div class="text-4xl font-bold grad-primary mb-2" style="font-family:'Syne',sans-serif;">24</div>
         <div class="mono text-xs text-muted tracking-widest">TOTAL DATASETS</div>
         <div class="text-xs text-muted mt-2 opacity-70">8 regimes × 3 seeds</div>
       </div>
-      <div class="glass-card p-6 text-center" style="border-color:rgba(92,122,90,0.2)">
-        <div class="text-4xl font-bold grad-accent mb-2" style="font-family:'Shippori Mincho','Syne',serif;">8</div>
+      <div class="glass-card p-6 text-center" style="border-color:rgba(0,255,163,0.2)">
+        <div class="text-4xl font-bold grad-accent mb-2" style="font-family:'Syne',sans-serif;">8</div>
         <div class="mono text-xs text-muted tracking-widest">EXPERIMENT REGIMES</div>
         <div class="text-xs text-muted mt-2 opacity-70">Each isolates one statistical factor</div>
       </div>
-      <div class="glass-card p-6 text-center" style="border-color:rgba(42,47,69,0.2)">
-        <div class="text-4xl font-bold grad-warm mb-2" style="font-family:'Shippori Mincho','Syne',serif;">3</div>
+      <div class="glass-card p-6 text-center" style="border-color:rgba(124,58,237,0.2)">
+        <div class="text-4xl font-bold grad-warm mb-2" style="font-family:'Syne',sans-serif;">3</div>
         <div class="mono text-xs text-muted tracking-widest">SEEDS PER REGIME</div>
         <div class="text-xs text-muted mt-2 opacity-70">Seeds 42, 123, 999</div>
       </div>
@@ -1314,7 +1283,7 @@
       <!-- baseline -->
       <div class="regime-card regime-easy glass-card glass-card-hover">
         <div class="mono text-xs mb-3" style="color:var(--accent)">BASELINE</div>
-        <div class="text-base font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Performance Ceiling</div>
+        <div class="text-base font-bold mb-2" style="font-family:'Syne',sans-serif;">Performance Ceiling</div>
         <div class="text-xs text-muted mb-4 leading-relaxed">Moderate noise, strong signal, balanced 55/45 split. Reference ceiling for all other regimes.</div>
         <div class="space-y-2">
           <div class="flex justify-between items-center">
@@ -1334,13 +1303,13 @@
             <span class="mono text-xs" style="color:var(--accent)">97.66%</span>
           </div>
         </div>
-        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(92,122,90,0.07);border:1px solid rgba(92,122,90,0.2);color:#5C7A5A;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
+        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(0,255,163,0.07);border:1px solid rgba(0,255,163,0.2);color:#00FFA3;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
       </div>
 
       <!-- high_noise -->
       <div class="regime-card regime-medium glass-card glass-card-hover">
         <div class="mono text-xs mb-3" style="color:var(--primary)">HIGH NOISE</div>
-        <div class="text-base font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Noisy Background</div>
+        <div class="text-base font-bold mb-2" style="font-family:'Syne',sans-serif;">Noisy Background</div>
         <div class="text-xs text-muted mb-4 leading-relaxed">Background rates 5–12%, 20 correlated blocks (ρ=0.85). Tests LASSO L1 robustness over MI alone.</div>
         <div class="space-y-2">
           <div class="flex justify-between items-center">
@@ -1360,91 +1329,91 @@
             <span class="mono text-xs" style="color:var(--primary)">91.71%</span>
           </div>
         </div>
-        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(107,158,148,0.07);border:1px solid rgba(107,158,148,0.2);color:var(--primary);font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
+        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.2);color:var(--primary);font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
       </div>
 
       <!-- extreme_sparsity -->
-      <div class="regime-card glass-card glass-card-hover" style="border-color:rgba(110,143,160,0.15)">
-        <div class="mono text-xs mb-3" style="color:#6E8FA0">EXTREME SPARSITY</div>
-        <div class="text-base font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Low-TMB Landscape</div>
+      <div class="regime-card glass-card glass-card-hover" style="border-color:rgba(96,165,250,0.15)">
+        <div class="mono text-xs mb-3" style="color:#60A5FA">EXTREME SPARSITY</div>
+        <div class="text-base font-bold mb-2" style="font-family:'Syne',sans-serif;">Low-TMB Landscape</div>
         <div class="text-xs text-muted mb-4 leading-relaxed">Background rates 0.1–0.8%, co-mutation support 15%. Realistic low-TMB WES scenario.</div>
         <div class="space-y-2">
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">Mean OR</span>
-            <span class="mono text-xs" style="color:#6E8FA0">33.82</span>
+            <span class="mono text-xs" style="color:#60A5FA">33.82</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">RecOR2</span>
-            <span class="mono text-xs" style="color:#6E8FA0">0.967</span>
+            <span class="mono text-xs" style="color:#60A5FA">0.967</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">Lift</span>
-            <span class="mono text-xs" style="color:#6E8FA0">66.21</span>
+            <span class="mono text-xs" style="color:#60A5FA">66.21</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">Sparsity</span>
-            <span class="mono text-xs" style="color:#6E8FA0">99.39%</span>
+            <span class="mono text-xs" style="color:#60A5FA">99.39%</span>
           </div>
         </div>
-        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(110,143,160,0.07);border:1px solid rgba(110,143,160,0.2);color:#6E8FA0;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
+        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(96,165,250,0.07);border:1px solid rgba(96,165,250,0.2);color:#60A5FA;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
       </div>
 
       <!-- class_imbalance -->
-      <div class="regime-card glass-card glass-card-hover" style="border-color:rgba(168,124,138,0.15)">
-        <div class="mono text-xs mb-3" style="color:#A87C8A">CLASS IMBALANCE</div>
-        <div class="text-base font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Rare-Disease Screen</div>
+      <div class="regime-card glass-card glass-card-hover" style="border-color:rgba(244,114,182,0.15)">
+        <div class="mono text-xs mb-3" style="color:#F472B6">CLASS IMBALANCE</div>
+        <div class="text-base font-bold mb-2" style="font-family:'Syne',sans-serif;">Rare-Disease Screen</div>
         <div class="text-xs text-muted mb-4 leading-relaxed">20% cancer fraction. Tests QUBO objective weighting to compensate for class skew.</div>
         <div class="space-y-2">
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">Mean OR</span>
-            <span class="mono text-xs" style="color:#A87C8A">28.90</span>
+            <span class="mono text-xs" style="color:#F472B6">28.90</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">RecOR2</span>
-            <span class="mono text-xs" style="color:#A87C8A">0.967</span>
+            <span class="mono text-xs" style="color:#F472B6">0.967</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">Lift</span>
-            <span class="mono text-xs" style="color:#A87C8A">48.41</span>
+            <span class="mono text-xs" style="color:#F472B6">48.41</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">Cancer Fraction</span>
-            <span class="mono text-xs" style="color:#A87C8A">20%</span>
+            <span class="mono text-xs" style="color:#F472B6">20%</span>
           </div>
         </div>
-        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(168,124,138,0.07);border:1px solid rgba(168,124,138,0.2);color:#A87C8A;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
+        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(244,114,182,0.07);border:1px solid rgba(244,114,182,0.2);color:#F472B6;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
       </div>
 
       <!-- weak_signal -->
       <div class="regime-card regime-hard glass-card glass-card-hover">
-        <div class="mono text-xs mb-3" style="color:#7A8AAA">WEAK SIGNAL</div>
-        <div class="text-base font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Detection Limit</div>
+        <div class="mono text-xs mb-3" style="color:#a78bfa">WEAK SIGNAL</div>
+        <div class="text-base font-bold mb-2" style="font-family:'Syne',sans-serif;">Detection Limit</div>
         <div class="text-xs text-muted mb-4 leading-relaxed">Biomarker rates scaled to 40% of TCGA baseline. MI fails below ~10× OR; LASSO recovers to ~5×.</div>
         <div class="space-y-2">
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">Mean OR</span>
-            <span class="mono text-xs" style="color:#7A8AAA">15.15</span>
+            <span class="mono text-xs" style="color:#a78bfa">15.15</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">RecOR2</span>
-            <span class="mono text-xs" style="color:#7A8AAA">0.967</span>
+            <span class="mono text-xs" style="color:#a78bfa">0.967</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">Lift</span>
-            <span class="mono text-xs" style="color:#7A8AAA">20.37</span>
+            <span class="mono text-xs" style="color:#a78bfa">20.37</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">CoMut C</span>
-            <span class="mono text-xs" style="color:#7A8AAA">0.162</span>
+            <span class="mono text-xs" style="color:#a78bfa">0.162</span>
           </div>
         </div>
-        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(42,47,69,0.07);border:1px solid rgba(42,47,69,0.2);color:#7A8AAA;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
+        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(124,58,237,0.07);border:1px solid rgba(124,58,237,0.2);color:#a78bfa;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
       </div>
 
       <!-- high_dimensional -->
-      <div class="regime-card glass-card glass-card-hover" style="border-color:rgba(107,158,148,0.25);background:rgba(107,158,148,0.02)">
+      <div class="regime-card glass-card glass-card-hover" style="border-color:rgba(0,229,255,0.25);background:rgba(0,229,255,0.02)">
         <div class="mono text-xs mb-3" style="color:var(--primary)">HIGH DIMENSIONAL</div>
-        <div class="text-base font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">MI/LASSO Justification</div>
+        <div class="text-base font-bold mb-2" style="font-family:'Syne',sans-serif;">MI/LASSO Justification</div>
         <div class="text-xs text-muted mb-4 leading-relaxed">10,000 genes × 1,500 patients. Demonstrates O(n·p) vs O(2ᵏ) scaling — why QUBO pre-filtering is non-optional.</div>
         <div class="space-y-2">
           <div class="flex justify-between items-center">
@@ -1464,13 +1433,13 @@
             <span class="mono text-xs" style="color:var(--primary)">97.73%</span>
           </div>
         </div>
-        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(107,158,148,0.07);border:1px solid rgba(107,158,148,0.3);color:var(--primary);font-family:'Space Mono',monospace;">1500 patients · 10,000 genes</div>
+        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.3);color:var(--primary);font-family:'Space Mono',monospace;">1500 patients · 10,000 genes</div>
       </div>
 
       <!-- heterogeneity -->
-      <div class="regime-card glass-card glass-card-hover" style="border-color:rgba(92,122,90,0.2)">
+      <div class="regime-card glass-card glass-card-hover" style="border-color:rgba(0,255,163,0.2)">
         <div class="mono text-xs mb-3" style="color:var(--accent)">HETEROGENEITY</div>
-        <div class="text-base font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Molecular Subtypes</div>
+        <div class="text-base font-bold mb-2" style="font-family:'Syne',sans-serif;">Molecular Subtypes</div>
         <div class="text-xs text-muted mb-4 leading-relaxed">40% subtype B fraction, 30–60% attenuation. Tests QUBO multi-objective on mixed biological signals.</div>
         <div class="space-y-2">
           <div class="flex justify-between items-center">
@@ -1490,43 +1459,43 @@
             <span class="mono text-xs" style="color:var(--accent)">97.65%</span>
           </div>
         </div>
-        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(92,122,90,0.07);border:1px solid rgba(92,122,90,0.2);color:#5C7A5A;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
+        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(0,255,163,0.07);border:1px solid rgba(0,255,163,0.2);color:#00FFA3;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
       </div>
 
       <!-- correlated_noise -->
-      <div class="regime-card regime-hard glass-card glass-card-hover" style="border-color:rgba(138,96,112,0.2)">
-        <div class="mono text-xs mb-3" style="color:#8A6070">CORRELATED NOISE</div>
-        <div class="text-base font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Adversarial CNV</div>
+      <div class="regime-card regime-hard glass-card glass-card-hover" style="border-color:rgba(236,72,153,0.2)">
+        <div class="mono text-xs mb-3" style="color:#EC4899">CORRELATED NOISE</div>
+        <div class="text-base font-bold mb-2" style="font-family:'Syne',sans-serif;">Adversarial CNV</div>
         <div class="text-xs text-muted mb-4 leading-relaxed">30 blocks × 25 genes, ρ=0.95. Exploits MI marginal weakness — LASSO/QUBO joint objectives expected to outperform.</div>
         <div class="space-y-2">
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">Mean OR</span>
-            <span class="mono text-xs" style="color:#8A6070">34.50</span>
+            <span class="mono text-xs" style="color:#EC4899">34.50</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">RecOR2</span>
-            <span class="mono text-xs" style="color:#8A6070">0.967</span>
+            <span class="mono text-xs" style="color:#EC4899">0.967</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">Lift</span>
-            <span class="mono text-xs" style="color:#8A6070">59.51</span>
+            <span class="mono text-xs" style="color:#EC4899">59.51</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-xs text-muted">Sparsity</span>
-            <span class="mono text-xs" style="color:#8A6070">94.51%</span>
+            <span class="mono text-xs" style="color:#EC4899">94.51%</span>
           </div>
         </div>
-        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(138,96,112,0.07);border:1px solid rgba(138,96,112,0.2);color:#8A6070;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
+        <div class="mt-4 text-xs px-2 py-1 rounded" style="background:rgba(236,72,153,0.07);border:1px solid rgba(236,72,153,0.2);color:#EC4899;font-family:'Space Mono',monospace;">1000 patients · 2000 genes</div>
       </div>
 
     </div>
 
     <!-- PER-EXPERIMENT STATS TABLE -->
     <div class="fade-up">
-      <div class="glass-card overflow-x-auto" style="border-color:rgba(107,158,148,0.12)">
+      <div class="glass-card overflow-x-auto" style="border-color:rgba(0,229,255,0.12)">
         <div class="px-6 pt-6 pb-4 flex items-center gap-4">
           <div class="mono text-xs text-primary opacity-70">PER-EXPERIMENT STATISTICS</div>
-          <div class="flex-1 h-px" style="background:rgba(107,158,148,0.15)"></div>
+          <div class="flex-1 h-px" style="background:rgba(0,229,255,0.15)"></div>
           <div class="mono text-xs text-muted opacity-50">mean across 3 seeds</div>
         </div>
         <table class="results-table w-full" style="min-width:700px">
@@ -1559,7 +1528,7 @@
               <td><span class="mono text-xs" style="color:var(--primary)">high_noise</span></td>
               <td class="text-center mono text-xs">1000</td>
               <td class="text-center mono text-xs">2000</td>
-              <td class="text-center mono text-xs" style="color:#A87C8A">91.71</td>
+              <td class="text-center mono text-xs" style="color:#F472B6">91.71</td>
               <td class="text-center mono text-xs">0.550</td>
               <td class="text-center mono text-xs">32.98</td>
               <td class="text-center mono text-xs">0.967</td>
@@ -1567,37 +1536,37 @@
               <td class="text-center mono text-xs">58.29</td>
             </tr>
             <tr>
-              <td><span class="mono text-xs" style="color:#6E8FA0">extreme_sparsity</span></td>
+              <td><span class="mono text-xs" style="color:#60A5FA">extreme_sparsity</span></td>
               <td class="text-center mono text-xs">1000</td>
               <td class="text-center mono text-xs">2000</td>
-              <td class="text-center mono text-xs font-bold" style="color:#6E8FA0">99.39</td>
+              <td class="text-center mono text-xs font-bold" style="color:#60A5FA">99.39</td>
               <td class="text-center mono text-xs">0.550</td>
               <td class="text-center mono text-xs">33.82</td>
               <td class="text-center mono text-xs">0.967</td>
-              <td class="text-center mono text-xs" style="color:#A87C8A">0.285</td>
-              <td class="text-center mono text-xs font-bold" style="color:#6E8FA0">66.21</td>
+              <td class="text-center mono text-xs" style="color:#F472B6">0.285</td>
+              <td class="text-center mono text-xs font-bold" style="color:#60A5FA">66.21</td>
             </tr>
             <tr>
-              <td><span class="mono text-xs" style="color:#A87C8A">class_imbalance</span></td>
+              <td><span class="mono text-xs" style="color:#F472B6">class_imbalance</span></td>
               <td class="text-center mono text-xs">1000</td>
               <td class="text-center mono text-xs">2000</td>
               <td class="text-center mono text-xs">97.74</td>
-              <td class="text-center mono text-xs font-bold" style="color:#A87C8A">0.200</td>
+              <td class="text-center mono text-xs font-bold" style="color:#F472B6">0.200</td>
               <td class="text-center mono text-xs">28.90</td>
               <td class="text-center mono text-xs">0.967</td>
               <td class="text-center mono text-xs">0.453</td>
               <td class="text-center mono text-xs">48.41</td>
             </tr>
             <tr>
-              <td><span class="mono text-xs" style="color:#7A8AAA">weak_signal</span></td>
+              <td><span class="mono text-xs" style="color:#a78bfa">weak_signal</span></td>
               <td class="text-center mono text-xs">1000</td>
               <td class="text-center mono text-xs">2000</td>
               <td class="text-center mono text-xs">97.75</td>
               <td class="text-center mono text-xs">0.550</td>
-              <td class="text-center mono text-xs font-bold" style="color:#A87C8A">15.15</td>
+              <td class="text-center mono text-xs font-bold" style="color:#F472B6">15.15</td>
               <td class="text-center mono text-xs">0.967</td>
-              <td class="text-center mono text-xs font-bold" style="color:#A87C8A">0.162</td>
-              <td class="text-center mono text-xs font-bold" style="color:#A87C8A">20.37</td>
+              <td class="text-center mono text-xs font-bold" style="color:#F472B6">0.162</td>
+              <td class="text-center mono text-xs font-bold" style="color:#F472B6">20.37</td>
             </tr>
             <tr>
               <td><span class="mono text-xs" style="color:var(--primary)">high_dimensional</span></td>
@@ -1622,12 +1591,12 @@
               <td class="text-center mono text-xs font-bold" style="color:var(--accent)">65.52</td>
             </tr>
             <tr>
-              <td><span class="mono text-xs" style="color:#8A6070">correlated_noise</span></td>
+              <td><span class="mono text-xs" style="color:#EC4899">correlated_noise</span></td>
               <td class="text-center mono text-xs">1000</td>
               <td class="text-center mono text-xs">2000</td>
               <td class="text-center mono text-xs">94.51</td>
               <td class="text-center mono text-xs">0.550</td>
-              <td class="text-center mono text-xs font-bold" style="color:#8A6070">34.50</td>
+              <td class="text-center mono text-xs font-bold" style="color:#EC4899">34.50</td>
               <td class="text-center mono text-xs">0.967</td>
               <td class="text-center mono text-xs">0.443</td>
               <td class="text-center mono text-xs">59.51</td>
@@ -1641,7 +1610,7 @@
     </div>
 
     <!-- SAFE CLAIMS NOTE -->
-    <div class="mt-8 glass-card p-5 fade-up" style="border-color:rgba(92,122,90,0.15)">
+    <div class="mt-8 glass-card p-5 fade-up" style="border-color:rgba(0,255,163,0.15)">
       <div class="mono text-xs mb-3" style="color:var(--accent)">INTENDED USE — METHODOLOGICAL VALIDATION ONLY</div>
       <div class="text-xs text-muted leading-relaxed">This benchmark framework is designed exclusively for ablation studies, algorithm benchmarking, and proof-of-concept validation of the MI + LASSO + QUBO/QAOA pipeline. Results must not be interpreted as clinical findings or biological hypotheses about real cancer drivers. Gene names are drawn from TCGA BRCA; class-conditional rates are calibrated on published TCGA BRCA frequencies (CGAL 2012).</div>
     </div>
@@ -1654,7 +1623,7 @@
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">09 / Key Findings</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">Research Outcomes</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Research Outcomes</h2>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-5 fade-up">
@@ -1664,12 +1633,12 @@
         <div class="text-xs text-muted opacity-70">From 16,519 genes to 10 candidates</div>
       </div>
       <div class="stat-block">
-        <div class="text-4xl font-bold mb-3 grad-accent" style="font-family:'Shippori Mincho','Syne',serif;">0.7701</div>
+        <div class="text-4xl font-bold mb-3 grad-accent" style="font-family:'Syne',sans-serif;">0.7701</div>
         <div class="mono text-xs text-muted tracking-wide mb-2">BEST AUC</div>
         <div class="text-xs text-muted opacity-70">LASSO regularization baseline</div>
       </div>
       <div class="stat-block">
-        <div class="counter text-4xl font-bold mb-3 grad-warm" style="font-family:'Shippori Mincho','Syne',serif;" data-target="16519" data-suffix="">0</div>
+        <div class="counter text-4xl font-bold mb-3 grad-warm" style="font-family:'Syne',sans-serif;" data-target="16519" data-suffix="">0</div>
         <div class="mono text-xs text-muted tracking-wide mb-2">ORIGINAL GENES</div>
         <div class="text-xs text-muted opacity-70">TCGA-BRCA dimensionality</div>
       </div>
@@ -1683,48 +1652,48 @@
 </section>
 
 <!-- ========== CONTRIBUTIONS ========== -->
-<section id="contributions" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,70,67,0.02),transparent)">
+<section id="contributions" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,229,255,0.02),transparent)">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">10 / Contributions</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">Scientific Contributions</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Scientific Contributions</h2>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 fade-up">
       
       <div class="contrib-card">
         <div class="mono text-xs text-primary opacity-40 mb-3">C.01</div>
-        <h4 class="font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Binary Mutation Dataset</h4>
+        <h4 class="font-bold mb-2" style="font-family:'Syne',sans-serif;">Binary Mutation Dataset</h4>
         <p class="text-muted text-sm leading-relaxed">Construction of a standardized binary mutation matrix from raw TCGA-BRCA MAF files, including quality control and filtering pipelines.</p>
       </div>
       
       <div class="contrib-card">
         <div class="mono text-xs text-primary opacity-40 mb-3">C.02</div>
-        <h4 class="font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Synthetic Benchmark Framework</h4>
+        <h4 class="font-bold mb-2" style="font-family:'Syne',sans-serif;">Synthetic Benchmark Framework</h4>
         <p class="text-muted text-sm leading-relaxed">A three-regime synthetic dataset generator enabling reproducible evaluation of feature selection methods under controlled noise conditions.</p>
       </div>
       
       <div class="contrib-card">
         <div class="mono text-xs text-primary opacity-40 mb-3">C.03</div>
-        <h4 class="font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Hybrid Quantum-Classical Pipeline</h4>
+        <h4 class="font-bold mb-2" style="font-family:'Syne',sans-serif;">Hybrid Quantum-Classical Pipeline</h4>
         <p class="text-muted text-sm leading-relaxed">End-to-end integration of quantum optimization within a classical genomics workflow — from mutation data to classification evaluation.</p>
       </div>
       
-      <div class="contrib-card" style="border-color:rgba(107,158,148,0.12)">
+      <div class="contrib-card" style="border-color:rgba(0,229,255,0.12)">
         <div class="mono text-xs text-primary opacity-40 mb-3">C.04</div>
-        <h4 class="font-bold mb-2 grad-primary" style="font-family:'Shippori Mincho','Syne',serif;">QAOA Biomarker Selection</h4>
+        <h4 class="font-bold mb-2 grad-primary" style="font-family:'Syne',sans-serif;">QAOA Biomarker Selection</h4>
         <p class="text-muted text-sm leading-relaxed">First application of QUBO-formulated QAOA to TCGA-BRCA genomic biomarker selection, reducing search space by 99.9%.</p>
       </div>
       
       <div class="contrib-card">
         <div class="mono text-xs text-primary opacity-40 mb-3">C.05</div>
-        <h4 class="font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">FP-Growth Pattern Discovery</h4>
+        <h4 class="font-bold mb-2" style="font-family:'Syne',sans-serif;">FP-Growth Pattern Discovery</h4>
         <p class="text-muted text-sm leading-relaxed">Application of frequent pattern mining to mutation co-occurrence for alternative combinatorial biomarker discovery and feature engineering.</p>
       </div>
       
       <div class="contrib-card">
         <div class="mono text-xs text-primary opacity-40 mb-3">C.06</div>
-        <h4 class="font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Comparative Evaluation Framework</h4>
+        <h4 class="font-bold mb-2" style="font-family:'Syne',sans-serif;">Comparative Evaluation Framework</h4>
         <p class="text-muted text-sm leading-relaxed">Systematic comparison of MI, LASSO, QAOA, and FP-Growth under unified experimental conditions with AUC, F1, and ROC analysis.</p>
       </div>
     </div>
@@ -1736,7 +1705,7 @@
   <div class="max-w-4xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">11 / Future Work</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">Research Roadmap</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">Research Roadmap</h2>
     </div>
 
     <div class="space-y-0 fade-up">
@@ -1745,7 +1714,7 @@
         <div class="roadmap-dot"></div>
         <div class="glass-card p-5">
           <div class="flex items-start justify-between mb-2">
-            <div class="font-bold" style="font-family:'Shippori Mincho','Syne',serif;">Larger Quantum Hardware</div>
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Larger Quantum Hardware</div>
             <div class="metric-badge">Near-term</div>
           </div>
           <p class="text-muted text-sm leading-relaxed">Scaling QAOA to real quantum processors (IBM Quantum, IonQ) with 50–100+ qubits enables larger candidate gene subsets and more complex QUBO formulations.</p>
@@ -1753,44 +1722,44 @@
       </div>
 
       <div class="roadmap-item pb-8">
-        <div class="roadmap-dot" style="border-color:var(--secondary);box-shadow:0 0 10px rgba(42,47,69,0.3)"></div>
+        <div class="roadmap-dot" style="border-color:var(--secondary);box-shadow:0 0 12px rgba(124,58,237,0.4)"></div>
         <div class="glass-card p-5">
           <div class="flex items-start justify-between mb-2">
-            <div class="font-bold" style="font-family:'Shippori Mincho','Syne',serif;">Multi-Omics Integration</div>
-            <div class="metric-badge" style="border-color:rgba(42,47,69,0.3);background:rgba(42,47,69,0.08);color:#7A8AAA">Mid-term</div>
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Multi-Omics Integration</div>
+            <div class="metric-badge" style="border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.08);color:#a78bfa">Mid-term</div>
           </div>
           <p class="text-muted text-sm leading-relaxed">Extending the pipeline to incorporate RNA-seq expression, copy number variation, and methylation data for a holistic multi-modal biomarker selection framework.</p>
         </div>
       </div>
 
       <div class="roadmap-item pb-8">
-        <div class="roadmap-dot" style="border-color:var(--accent);box-shadow:0 0 10px rgba(92,122,90,0.3)"></div>
+        <div class="roadmap-dot" style="border-color:var(--accent);box-shadow:0 0 12px rgba(0,255,163,0.4)"></div>
         <div class="glass-card p-5">
           <div class="flex items-start justify-between mb-2">
-            <div class="font-bold" style="font-family:'Shippori Mincho','Syne',serif;">Advanced QUBO Formulations</div>
-            <div class="metric-badge" style="border-color:rgba(92,122,90,0.3);background:rgba(92,122,90,0.08);color:#5C7A5A">Research</div>
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Advanced QUBO Formulations</div>
+            <div class="metric-badge" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">Research</div>
           </div>
           <p class="text-muted text-sm leading-relaxed">Incorporating pathway-level constraints, protein-protein interaction networks, and biologically-informed penalty terms directly into the QUBO objective.</p>
         </div>
       </div>
 
       <div class="roadmap-item pb-8">
-        <div class="roadmap-dot" style="border-color:#A87C8A;box-shadow:0 0 10px rgba(168,124,138,0.3)"></div>
+        <div class="roadmap-dot" style="border-color:#F472B6;box-shadow:0 0 12px rgba(244,114,182,0.4)"></div>
         <div class="glass-card p-5">
           <div class="flex items-start justify-between mb-2">
-            <div class="font-bold" style="font-family:'Shippori Mincho','Syne',serif;">Deep Learning Integration</div>
-            <div class="metric-badge" style="border-color:rgba(168,124,138,0.3);background:rgba(168,124,138,0.08);color:#A87C8A">Long-term</div>
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">Deep Learning Integration</div>
+            <div class="metric-badge" style="border-color:rgba(244,114,182,0.3);background:rgba(244,114,182,0.08);color:#F472B6">Long-term</div>
           </div>
           <p class="text-muted text-sm leading-relaxed">Replacing logistic regression with graph neural networks or transformers operating on quantum-selected gene interaction graphs for improved prediction.</p>
         </div>
       </div>
 
       <div class="roadmap-item">
-        <div class="roadmap-dot" style="border-color:#6E8FA0;box-shadow:0 0 10px rgba(110,143,160,0.3)"></div>
+        <div class="roadmap-dot" style="border-color:#60A5FA;box-shadow:0 0 12px rgba(96,165,250,0.4)"></div>
         <div class="glass-card p-5">
           <div class="flex items-start justify-between mb-2">
-            <div class="font-bold" style="font-family:'Shippori Mincho','Syne',serif;">External Validation Cohorts</div>
-            <div class="metric-badge" style="border-color:rgba(110,143,160,0.3);background:rgba(110,143,160,0.08);color:#6E8FA0">Clinical</div>
+            <div class="font-bold" style="font-family:'Syne',sans-serif;">External Validation Cohorts</div>
+            <div class="metric-badge" style="border-color:rgba(96,165,250,0.3);background:rgba(96,165,250,0.08);color:#60A5FA">Clinical</div>
           </div>
           <p class="text-muted text-sm leading-relaxed">Validating the 10 QAOA-selected biomarkers in independent cohorts (METABRIC, CBCGA) and prospective clinical settings to confirm translational relevance.</p>
         </div>
@@ -1801,11 +1770,11 @@
 </section>
 
 <!-- ========== AUTHORS ========== -->
-<section id="authors" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,70,67,0.02),transparent)">
+<section id="authors" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,229,255,0.02),transparent)">
   <div class="max-w-5xl mx-auto">
     <div class="text-center mb-16 fade-up">
       <div class="section-label mb-4">12 / Research Team</div>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Shippori Mincho','Syne',serif;">About the Authors</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Syne',sans-serif;">About the Authors</h2>
     </div>
 
     <div class="grid md:grid-cols-3 gap-6 fade-up">
@@ -1813,25 +1782,25 @@
       <div class="author-card">
         <div class="author-avatar">SE</div>
         <div class="metric-badge mb-3">Author</div>
-        <h3 class="text-lg font-bold mb-1" style="font-family:'Shippori Mincho','Syne',serif;">Seif Eddine Addar</h3>
+        <h3 class="text-lg font-bold mb-1" style="font-family:'Syne',sans-serif;">Seif Eddine Addar</h3>
         <div class="text-muted text-sm mb-4">Master's candidate in Data Science & NLP, specializing in quantum-classical hybrid algorithms for computational biology.</div>
         <div class="divider my-4"></div>
         <div class="text-xs text-muted">Saad Dahlab University<br>Blida 1 · Algeria · 2026</div>
       </div>
 
-      <div class="author-card" style="border-color:rgba(42,47,69,0.2)">
-        <div class="author-avatar" style="background:linear-gradient(135deg,rgba(42,47,69,0.2),rgba(138,96,112,0.2));border-color:rgba(42,47,69,0.4);color:#7A8AAA">LR</div>
-        <div class="metric-badge mb-3" style="border-color:rgba(42,47,69,0.3);background:rgba(42,47,69,0.08);color:#7A8AAA">Author</div>
-        <h3 class="text-lg font-bold mb-1" style="font-family:'Shippori Mincho','Syne',serif;">Lokmane Rabehi</h3>
+      <div class="author-card" style="border-color:rgba(124,58,237,0.2)">
+        <div class="author-avatar" style="background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(236,72,153,0.2));border-color:rgba(124,58,237,0.4);color:#a78bfa">LR</div>
+        <div class="metric-badge mb-3" style="border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.08);color:#a78bfa">Author</div>
+        <h3 class="text-lg font-bold mb-1" style="font-family:'Syne',sans-serif;">Lokmane Rabehi</h3>
         <div class="text-muted text-sm mb-4">Master's candidate in Data Science & NLP, focusing on biomarker discovery, pattern mining, and machine learning for oncogenomics.</div>
         <div class="divider my-4"></div>
         <div class="text-xs text-muted">Saad Dahlab University<br>Blida 1 · Algeria · 2026</div>
       </div>
 
-      <div class="author-card" style="border-color:rgba(92,122,90,0.15)">
-        <div class="author-avatar" style="background:linear-gradient(135deg,rgba(92,122,90,0.15),rgba(107,158,148,0.15));border-color:rgba(92,122,90,0.4);color:#5C7A5A">CH</div>
-        <div class="metric-badge mb-3" style="border-color:rgba(92,122,90,0.3);background:rgba(92,122,90,0.08);color:#5C7A5A">Supervisor</div>
-        <h3 class="text-lg font-bold mb-1" style="font-family:'Shippori Mincho','Syne',serif;">Dr. Celia Hireche</h3>
+      <div class="author-card" style="border-color:rgba(0,255,163,0.15)">
+        <div class="author-avatar" style="background:linear-gradient(135deg,rgba(0,255,163,0.15),rgba(0,229,255,0.15));border-color:rgba(0,255,163,0.4);color:#00FFA3">CH</div>
+        <div class="metric-badge mb-3" style="border-color:rgba(0,255,163,0.3);background:rgba(0,255,163,0.08);color:#00FFA3">Supervisor</div>
+        <h3 class="text-lg font-bold mb-1" style="font-family:'Syne',sans-serif;">Dr. Celia Hireche</h3>
         <div class="text-muted text-sm mb-4">Research supervisor and faculty advisor. Expert in computational methods, bioinformatics, and applied machine learning at Blida 1.</div>
         <div class="divider my-4"></div>
         <div class="text-xs text-muted">Saad Dahlab University<br>Blida 1 · Algeria</div>
@@ -1841,27 +1810,27 @@
 </section>
 
 <!-- ========== FOOTER ========== -->
-<footer style="background:rgba(8,18,16,0.97);border-top:1px solid rgba(0,70,67,0.2)" class="py-16 px-6">
+<footer style="background:rgba(5,8,22,0.95);border-top:1px solid var(--border)" class="py-16 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="grid md:grid-cols-3 gap-10 mb-12">
       <div>
         <div class="mono text-xs text-primary opacity-60 mb-3 tracking-widest">INSTITUTION</div>
-        <div class="font-bold mb-1" style="font-family:'Shippori Mincho','Syne',serif;">Saad Dahlab University<br>of Blida 1</div>
+        <div class="font-bold mb-1" style="font-family:'Syne',sans-serif;">Saad Dahlab University<br>of Blida 1</div>
         <div class="text-muted text-sm mt-2">Faculty of Sciences<br>Department of Computer Science<br>Data Science & NLP Program</div>
       </div>
       <div>
         <div class="mono text-xs text-primary opacity-60 mb-3 tracking-widest">RESEARCH</div>
-        <div class="font-bold mb-2" style="font-family:'Shippori Mincho','Syne',serif;">Master's Thesis — 2026</div>
+        <div class="font-bold mb-2" style="font-family:'Syne',sans-serif;">Master's Thesis — 2026</div>
         <div class="text-muted text-sm leading-relaxed">Hybrid Classical–Quantum Selection of Genetic Biomarkers for Breast Cancer Detection</div>
       </div>
       <div>
         <div class="mono text-xs text-primary opacity-60 mb-3 tracking-widest">DATASET & TOOLS</div>
         <div class="space-y-1">
-          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(107,158,148,0.06);border:1px solid rgba(107,158,148,0.15);color:var(--muted)">TCGA-BRCA</div>
-          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(107,158,148,0.06);border:1px solid rgba(107,158,148,0.15);color:var(--muted)">Qiskit</div>
-          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(107,158,148,0.06);border:1px solid rgba(107,158,148,0.15);color:var(--muted)">scikit-learn</div>
-          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(107,158,148,0.06);border:1px solid rgba(107,158,148,0.15);color:var(--muted)">mlxtend</div>
-          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(107,158,148,0.06);border:1px solid rgba(107,158,148,0.15);color:var(--muted)">Python 3.11</div>
+          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);color:var(--muted)">TCGA-BRCA</div>
+          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);color:var(--muted)">Qiskit</div>
+          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);color:var(--muted)">scikit-learn</div>
+          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);color:var(--muted)">mlxtend</div>
+          <div class="text-xs px-3 py-1.5 rounded inline-flex mr-2 mb-2 mono" style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);color:var(--muted)">Python 3.11</div>
         </div>
       </div>
     </div>
@@ -1898,7 +1867,7 @@ class Particle {
     this.vy = (Math.random() - 0.5) * 0.3;
     this.size = Math.random() * 1.5 + 0.3;
     this.opacity = Math.random() * 0.5 + 0.1;
-    this.color = Math.random() > 0.6 ? '#6B9E94' : Math.random() > 0.5 ? '#2A2F45' : '#5C7A5A';
+    this.color = Math.random() > 0.6 ? '#00E5FF' : Math.random() > 0.5 ? '#7C3AED' : '#00FFA3';
   }
   update() {
     this.x += this.vx;
@@ -1927,7 +1896,7 @@ function drawConnections() {
       if (dist < 100) {
         ctx.save();
         ctx.globalAlpha = (1 - dist / 100) * 0.08;
-        ctx.strokeStyle = '#6B9E94';
+        ctx.strokeStyle = '#00E5FF';
         ctx.lineWidth = 0.5;
         ctx.beginPath();
         ctx.moveTo(particles[i].x, particles[i].y);
@@ -2000,10 +1969,10 @@ function drawBarChart() {
   const ctx = canvas.getContext('2d');
   
   const data = [
-    { label: 'LASSO', value: 0.7701, color: '#6B9E94' },
-    { label: 'MI + LR', value: 0.68, color: '#6E8FA0' },
-    { label: 'QAOA', value: 0.6727, color: '#2A2F45' },
-    { label: 'FP-Growth', value: 0.5370, color: '#A87C8A' },
+    { label: 'LASSO', value: 0.7701, color: '#00E5FF' },
+    { label: 'MI + LR', value: 0.68, color: '#60A5FA' },
+    { label: 'QAOA', value: 0.6727, color: '#7C3AED' },
+    { label: 'FP-Growth', value: 0.5370, color: '#F472B6' },
   ];
 
   const W = canvas.width, H = canvas.height;
@@ -2042,12 +2011,12 @@ function drawBarChart() {
       const y = padT + chartH - (i / 5) * chartH;
       const val = (minVal + (maxVal - minVal) * (i / 5)).toFixed(2);
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(0,70,67,0.08)';
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
       ctx.lineWidth = 1;
       ctx.moveTo(padL, y);
       ctx.lineTo(padL + chartW, y);
       ctx.stroke();
-      ctx.fillStyle = 'rgba(0,60,56,0.6)';
+      ctx.fillStyle = 'rgba(148,163,184,0.7)';
       ctx.font = '10px Space Mono, monospace';
       ctx.textAlign = 'right';
       ctx.fillText(val, padL - 6, y + 4);
@@ -2091,14 +2060,14 @@ function drawBarChart() {
       }
       
       // X label
-      ctx.fillStyle = 'rgba(0,60,56,0.55)';
+      ctx.fillStyle = 'rgba(148,163,184,0.8)';
       ctx.font = '10px Space Mono, monospace';
       ctx.textAlign = 'center';
       ctx.fillText(d.label, x + barW / 2, padT + chartH + 20);
     });
 
     // Highlight best
-    ctx.strokeStyle = 'rgba(107,158,148,0.2)';
+    ctx.strokeStyle = 'rgba(0,229,255,0.2)';
     ctx.lineWidth = 1;
     ctx.setLineDash([4, 4]);
     const bestY = padT + chartH - ((0.7701 - minVal) / (maxVal - minVal)) * chartH;
@@ -2164,25 +2133,25 @@ function drawROC() {
     const x = padL + (i / 4) * cW;
     const y = padT + (i / 4) * cH;
     const val = (i / 4).toFixed(2);
-    svgContent += `<line x1="${x}" y1="${padT}" x2="${x}" y2="${padT + cH}" stroke="rgba(0,70,67,0.07)" stroke-width="1"/>`;
-    svgContent += `<line x1="${padL}" y1="${y}" x2="${padL + cW}" y2="${y}" stroke="rgba(0,70,67,0.07)" stroke-width="1"/>`;
-    svgContent += `<text x="${x}" y="${padT + cH + 14}" font-family="Space Mono" font-size="8" fill="rgba(0,60,56,0.5)" text-anchor="middle">${val}</text>`;
-    if (i > 0) svgContent += `<text x="${padL - 6}" y="${y + 3}" font-family="Space Mono" font-size="8" fill="rgba(0,60,56,0.5)" text-anchor="end">${(1 - i / 4).toFixed(2)}</text>`;
+    svgContent += `<line x1="${x}" y1="${padT}" x2="${x}" y2="${padT + cH}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+    svgContent += `<line x1="${padL}" y1="${y}" x2="${padL + cW}" y2="${y}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+    svgContent += `<text x="${x}" y="${padT + cH + 14}" font-family="Space Mono" font-size="8" fill="rgba(148,163,184,0.6)" text-anchor="middle">${val}</text>`;
+    if (i > 0) svgContent += `<text x="${padL - 6}" y="${y + 3}" font-family="Space Mono" font-size="8" fill="rgba(148,163,184,0.6)" text-anchor="end">${(1 - i / 4).toFixed(2)}</text>`;
   }
 
   // Diagonal reference
-  svgContent += `<line x1="${padL}" y1="${padT + cH}" x2="${padL + cW}" y2="${padT}" stroke="rgba(0,70,67,0.2)" stroke-width="1" stroke-dasharray="4,4"/>`;
+  svgContent += `<line x1="${padL}" y1="${padT + cH}" x2="${padL + cW}" y2="${padT}" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="4,4"/>`;
 
   // Axes labels
-  svgContent += `<text x="${padL + cW / 2}" y="${H - 2}" font-family="Space Mono" font-size="8" fill="rgba(0,60,56,0.5)" text-anchor="middle">False Positive Rate</text>`;
-  svgContent += `<text x="9" y="${padT + cH / 2}" font-family="Space Mono" font-size="8" fill="rgba(0,60,56,0.5)" text-anchor="middle" transform="rotate(-90,9,${padT + cH / 2})">True Positive Rate</text>`;
+  svgContent += `<text x="${padL + cW / 2}" y="${H - 2}" font-family="Space Mono" font-size="8" fill="rgba(148,163,184,0.6)" text-anchor="middle">False Positive Rate</text>`;
+  svgContent += `<text x="9" y="${padT + cH / 2}" font-family="Space Mono" font-size="8" fill="rgba(148,163,184,0.6)" text-anchor="middle" transform="rotate(-90,9,${padT + cH / 2})">True Positive Rate</text>`;
 
   // Curves
   const curves = [
-    { label: 'LASSO', auc: 0.7701, color: '#6B9E94' },
-    { label: 'MI+LR', auc: 0.680, color: '#6E8FA0' },
-    { label: 'QAOA', auc: 0.6727, color: '#2A2F45' },
-    { label: 'FP-Growth', auc: 0.5370, color: '#A87C8A' },
+    { label: 'LASSO', auc: 0.7701, color: '#00E5FF' },
+    { label: 'MI+LR', auc: 0.680, color: '#60A5FA' },
+    { label: 'QAOA', auc: 0.6727, color: '#7C3AED' },
+    { label: 'FP-Growth', auc: 0.5370, color: '#F472B6' },
   ];
 
   curves.forEach(curve => {
@@ -2196,7 +2165,7 @@ function drawROC() {
     const lx = padL + 8;
     const ly = padT + 10 + i * 18;
     svgContent += `<rect x="${lx}" y="${ly - 6}" width="16" height="3" rx="1.5" fill="${c.color}" opacity="0.9"/>`;
-    svgContent += `<text x="${lx + 22}" y="${ly}" font-family="Space Mono" font-size="8.5" fill="rgba(0,40,38,0.7)">${c.label} (${c.auc})</text>`;
+    svgContent += `<text x="${lx + 22}" y="${ly}" font-family="Space Mono" font-size="8.5" fill="rgba(248,250,252,0.8)">${c.label} (${c.auc})</text>`;
   });
 
   svg.innerHTML = svgContent;
