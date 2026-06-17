@@ -889,8 +889,6 @@
     </div>
   </div>
 </section>
-
-<!-- ========== METHODS COMPARISON ========== -->
 <section id="methods" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(42,47,69,0.015),transparent)">
   <div class="max-w-5xl mx-auto">
     <div class="text-center mb-16 fade-up">
@@ -916,37 +914,18 @@
               <div class="flex items-center gap-3">
                 <div style="width:8px;height:8px;border-radius:2px;background:var(--primary)"></div>
                 <div>
-                  <div class="font-bold">LASSO</div>
-                  <div class="text-xs text-muted">Regularized Regression</div>
+                  <div class="font-bold">MI + LR</div>
+                  <div class="text-xs text-muted">Mutual Information</div>
                 </div>
               </div>
             </td>
             <td class="text-center">
-              <div class="font-bold mono text-lg" style="color:var(--primary)">0.7701</div>
+              <div class="font-bold mono text-lg" style="color:var(--primary)">0.8388</div>
             </td>
-            <td class="text-center text-xs text-muted">L1 Penalization</td>
-            <td class="text-center text-xs" style="color:var(--primary)">Sparse auto-selection</td>
+            <td class="text-center text-xs text-muted">Information-theoretic</td>
+            <td class="text-center text-xs" style="color:var(--primary)">Top-30 ranking features</td>
             <td class="text-center">
-              <span class="metric-badge">BEST</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="flex items-center gap-3">
-                <div style="width:8px;height:8px;border-radius:2px;background:var(--secondary)"></div>
-                <div>
-                  <div class="font-bold">QAOA</div>
-                  <div class="text-xs text-muted">Quantum Optimization</div>
-                </div>
-              </div>
-            </td>
-            <td class="text-center">
-              <div class="font-bold mono text-lg" style="color:var(--secondary)">0.6727</div>
-            </td>
-            <td class="text-center text-xs text-muted">QUBO formulation</td>
-            <td class="text-center text-xs" style="color:var(--secondary)">10 quantum candidates</td>
-            <td class="text-center">
-              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(42,47,69,0.1);border:1px solid rgba(42,47,69,0.2);color:#7A8AAA">QUANTUM</span>
+              <span class="metric-badge">BEST AUC</span>
             </td>
           </tr>
           <tr>
@@ -954,18 +933,18 @@
               <div class="flex items-center gap-3">
                 <div style="width:8px;height:8px;border-radius:2px;background:#6E8FA0"></div>
                 <div>
-                  <div class="font-bold">MI + LR</div>
-                  <div class="text-xs text-muted">Mutual Information</div>
+                  <div class="font-bold">LASSO</div>
+                  <div class="text-xs text-muted">Regularized Regression</div>
                 </div>
               </div>
             </td>
             <td class="text-center">
-              <div class="font-bold mono text-lg" style="color:#6E8FA0">—</div>
+              <div class="font-bold mono text-lg" style="color:#6E8FA0">0.8209</div>
             </td>
-            <td class="text-center text-xs text-muted">Information-theoretic</td>
-            <td class="text-center text-xs text-muted">Top-k ranking</td>
+            <td class="text-center text-xs text-muted">L1 Penalization</td>
+            <td class="text-center text-xs text-muted">Stable top-10 subset</td>
             <td class="text-center">
-              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(110,143,160,0.1);border:1px solid rgba(110,143,160,0.2);color:#6E8FA0">BASELINE</span>
+              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(110,143,160,0.1);border:1px solid rgba(110,143,160,0.2);color:#6E8FA0">CLASSICAL</span>
             </td>
           </tr>
           <tr>
@@ -979,12 +958,31 @@
               </div>
             </td>
             <td class="text-center">
-              <div class="font-bold mono text-lg" style="color:#A87C8A">0.5370</div>
+              <div class="font-bold mono text-lg" style="color:#A87C8A">0.7578</div>
             </td>
-            <td class="text-center text-xs text-muted">Association rules</td>
-            <td class="text-center text-xs text-muted">Frequent patterns</td>
+            <td class="text-center text-xs text-muted">Association rules (10% supp)</td>
+            <td class="text-center text-xs text-muted">2 genes (CDH1, TP53)</td>
             <td class="text-center">
               <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(168,124,138,0.1);border:1px solid rgba(168,124,138,0.2);color:#A87C8A">MINING</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-3">
+                <div style="width:8px;height:8px;border-radius:2px;background:var(--secondary)"></div>
+                <div>
+                  <div class="font-bold">QAOA</div>
+                  <div class="text-xs text-muted">Quantum Optimization</div>
+                </div>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="font-bold mono text-lg" style="color:var(--secondary)">0.7253</div>
+            </td>
+            <td class="text-center text-xs text-muted">QUBO formulation</td>
+            <td class="text-center text-xs" style="color:var(--secondary)">1 core gene (CDH1)</td>
+            <td class="text-center">
+              <span class="text-xs px-2 py-1 rounded mono" style="background:rgba(42,47,69,0.1);border:1px solid rgba(42,47,69,0.2);color:#7A8AAA">QUANTUM</span>
             </td>
           </tr>
         </tbody>
@@ -993,7 +991,6 @@
   </div>
 </section>
 
-<!-- ========== INTERACTIVE RESULTS DASHBOARD ========== -->
 <section id="results" class="py-28 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16 fade-up">
@@ -1003,7 +1000,6 @@
     </div>
 
     <div class="grid md:grid-cols-2 gap-6 fade-up">
-      <!-- BAR CHART -->
       <div class="glass-card p-6">
         <div class="flex items-center justify-between mb-6">
           <div>
@@ -1015,7 +1011,6 @@
         <canvas id="bar-chart-canvas" width="400" height="260"></canvas>
       </div>
 
-      <!-- ROC CURVES -->
       <div class="glass-card p-6">
         <div class="flex items-center justify-between mb-6">
           <div>
@@ -1029,7 +1024,6 @@
     </div>
   </div>
 </section>
-
 <!-- ========== QUANTUM OPTIMIZATION ========== -->
 <section id="quantum" class="py-28 px-6" style="background:linear-gradient(180deg,transparent,rgba(0,70,67,0.03),transparent)">
   <div class="max-w-6xl mx-auto">
@@ -2000,11 +1994,11 @@ function drawBarChart() {
   const ctx = canvas.getContext('2d');
   
   const data = [
-    { label: 'LASSO', value: 0.7701, color: '#6B9E94' },
-    { label: 'MI + LR', value: 0.68, color: '#6E8FA0' },
-    { label: 'QAOA', value: 0.6727, color: '#2A2F45' },
-    { label: 'FP-Growth', value: 0.5370, color: '#A87C8A' },
-  ];
+  { label: 'MI + LR', value: 0.8388, color: '#6E8FA0' },
+  { label: 'LASSO', value: 0.8209, color: '#6B9E94' },
+  { label: 'FP-Growth', value: 0.7578, color: '#A87C8A' },
+  { label: 'QAOA', value: 0.7253, color: '#2A2F45' },
+];
 
   const W = canvas.width, H = canvas.height;
   const padL = 50, padR = 20, padT = 20, padB = 50;
